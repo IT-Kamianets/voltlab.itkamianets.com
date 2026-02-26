@@ -1,1 +1,32 @@
-<p>unit-converter works!</p>
+<div class="converter-container">
+
+  <h2>Unit Converter</h2>
+
+  <label>Category</label>
+  <select >
+    <option *ngFor="let cat of []" [value]="cat">
+      {{cat}}
+    </option>
+  </select>
+
+  <div class="input-group">
+    <input type="number" >
+    <select >
+      <option *ngFor="let u of []" [value]="u">
+        {{u}}
+      </option>
+    </select>
+  </div>
+
+  <div class="equals">=</div>
+
+  <div class="input-group">
+    <input type="number" readonly>
+    <select >
+      <option *ngFor="let u of units[selectedCategory]" [value]="u">
+        {{u}}
+      </option>
+    </select>
+  </div>
+
+</div>
