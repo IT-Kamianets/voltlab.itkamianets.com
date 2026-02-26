@@ -1,0 +1,10 @@
+.rur {
+  color: #2c3e50;           /* Змінює колір тексту (можна використовувати hex, rgb або назви кольорів) */
+  font-size: 24px;          /* Розмір шрифту */
+  font-family: Arial, sans-serif; /* Тип шрифту (якщо першого немає, застосується другий) */
+  font-weight: bold;        /* Робить текст жирним (можна також використовувати цифри, наприклад 400, 700) */
+  text-align: center;       /* Вирівнювання тексту (center, left, right, justify) */
+  text-transform: uppercase;/* Робить всі літери великими (uppercase, lowercase, capitalize) */
+  letter-spacing: 2px;      /* Відстань між літерами */
+  line-height: 1.5;         /* Висота рядка (корисно для великих абзаців тексту) */
+}
