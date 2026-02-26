@@ -1,59 +1,57 @@
-# Voltlab
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+# Voltlab – terminal quick start
 
-## Development server
-
-To start a local development server, run:
+## 1. Init project in empty folder
 
 ```bash
-ng serve
+git init
+git remote add origin https://github.com/IT-Kamianets/voltlab.itkamianets.com.git
+git checkout -b master
+git fetch --all
+git reset --hard origin/master
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+If you need to remove old git history:
 
 ```bash
-ng generate component component-name
+rm -rf .git
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 2. Install dependencies
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+---
 
-To build the project run:
+## 3. Start project
 
 ```bash
-ng build
+npm run start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 4. Sync with remote (overwrite local changes)
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+> ⚠️ This will remove all local modifications.
 
 ```bash
-ng test
+git fetch --all
+git reset --hard origin/master
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 5. Commit and push changes (without VSCode UI)
 
 ```bash
-ng e2e
+git add --all .
+git commit -m "COMMIT MESSAGE"
+git pull origin master
+git push origin master
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
