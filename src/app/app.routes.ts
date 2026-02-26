@@ -52,6 +52,19 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/tips/tips.component').then((c) => c.TipsComponent),
   },
   {
+    path: 'legal',
+    loadComponent: () => import('./pages/legal/legal.component').then((c) => c.LegalComponent),
+  },
+  {
+    path: 'faq',
+    loadComponent: () => import('./pages/faq/faq.component').then((c) => c.FaqComponent),
+  },
+  {
+    path: 'glossary',
+    loadComponent: () =>
+      import('./pages/glossary/glossary.component').then((c) => c.GlossaryComponent),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',
