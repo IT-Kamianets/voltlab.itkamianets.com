@@ -18,28 +18,42 @@ export const routes: Routes = [
     path: 'device-power-calculator',
     loadComponent: () =>
       import('./pages/device-power-calculator/device-power-calculator.component').then(
-        (c) => c.DevicePowerCalculatorComponent
+        (c) => c.DevicePowerCalculatorComponent,
       ),
   },
   {
     path: 'ev-charging-calculator',
     loadComponent: () =>
       import('./pages/ev-charging-calculator/ev-charging-calculator.component').then(
-        (c) => c.EvChargingCalculatorComponent
+        (c) => c.EvChargingCalculatorComponent,
       ),
   },
   {
     path: 'settings',
-    loadComponent: () => import('./pages/settings/settings.component').then((c) => c.SettingsComponent),
+    loadComponent: () =>
+      import('./pages/settings/settings.component').then((c) => c.SettingsComponent),
   },
   {
     path: 'solar-calculator',
     loadComponent: () =>
-      import('./pages/solar-calculator/solar-calculator.component').then((c) => c.SolarCalculatorComponent),
+      import('./pages/solar-calculator/solar-calculator.component').then(
+        (c) => c.SolarCalculatorComponent,
+      ),
   },
   {
     path: 'unit-converter',
     loadComponent: () =>
-      import('./pages/unit-converter/unit-converter.component').then((c) => c.UnitConverterComponent),
+      import('./pages/unit-converter/unit-converter.component').then(
+        (c) => c.UnitConverterComponent,
+      ),
+  },
+  {
+    path: 'tips',
+    loadComponent: () => import('./pages/tips/tips.component').then((c) => c.TipsComponent),
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
 ];
