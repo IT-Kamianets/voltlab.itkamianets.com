@@ -1,0 +1,179 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+ 
+body{
+    background-color: #eef2f7;
+}
+
+header {
+    background: #0f172a;
+    color: #fff;
+    padding: 16px 0;
+}
+header h1 {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 22px;
+}
+
+.container{
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.card{
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.card__title{
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.accordion{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.acc{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+        overflow: hidden;
+}
+
+.acc__head{
+    background: #0f172a;
+    color: #fff;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.acc__body{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.field{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+input, select{
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 120px;
+}
+
+.chips{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+    font-size: 14px;
+}
+
+.sistem {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.chip{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding: 5px 5px;
+}
+
+.big{
+        font-size: 24px;
+    font-weight: bold;
+}
+
+.resultRow{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+button{
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background:#7b350f;
+}
+
+button:active {
+    transform: scale(0.9)
+}
+
+@media (max-width: 768px) {
+
+    .main {
+        flex-direction: column;
+    }
+
+    .field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input, select {
+        width: 100%;
+    }
+
+    .resultRow {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .chips {
+        flex-direction: column;
+    }
+
+    button{
+        width: 100%;
+    }
+}
