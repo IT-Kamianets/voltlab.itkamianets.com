@@ -1,113 +1,88 @@
 <div class="container">
+	<h1 class="title">Unit Converter</h1>
 
-  <h1 class="title">Unit Converter</h1>
+	<p class="description">
+		Calculate electrical power and convert energy units quickly and accurately. Enter voltage
+		and current to determine power, or switch to energy conversion between watt-hours and
+		kilowatt-hours.
+	</p>
 
-  <p class="description">
-    Calculate electrical power and convert energy units quickly and accurately.
-    Enter voltage and current to determine power, or switch to energy conversion
-    between watt-hours and kilowatt-hours.
-  </p>
+	<div class="tabs">
+		<button [class.active]="category === 'electrical'" (click)="category = 'electrical'">
+			Electrical
+		</button>
 
-  <div class="tabs">
-    <button 
-      [class.active]="category==='electrical'" 
-      (click)="category='electrical'">
-      Electrical
-    </button>
+		<button [class.active]="category === 'energy'" (click)="category = 'energy'">Energy</button>
+	</div>
 
-    <button 
-      [class.active]="category==='energy'" 
-      (click)="category='energy'">
-      Energy
-    </button>
-  </div>
+	<!-- ELECTRICAL -->
+	<div *ngIf="category === 'electrical'" class="card">
+		<div class="formula">
+			<strong>Formula:</strong>
+			Voltage (V)
+			<span class="operator">×</span>
+			Current (A)
+			<span class="operator">=</span>
+			Power (W)
+		</div>
 
-  <!-- ELECTRICAL -->
-  <div *ngIf="category==='electrical'" class="card">
+		<div class="field">
+			<label>Voltage (V)</label>
+			<input type="number" [(ngModel)]="voltage" (input)="calculatePower()" />
+		</div>
 
-    <div class="formula">
-      <strong>Formula:</strong>
-      Voltage (V)
-      <span class="operator">×</span>
-      Current (A)
-      <span class="operator">=</span>
-      Power (W)
-    </div>
+		<div class="field">
+			<label>Current (A)</label>
+			<input type="number" [(ngModel)]="current" (input)="calculatePower()" />
+		</div>
 
-    <div class="field">
-      <label>Voltage (V)</label>
-      <input type="number" [(ngModel)]="voltage" (input)="calculatePower()">
-    </div>
+		<div class="field">
+			<label>Power (W)</label>
+			<input type="number" [value]="power | number: '1.0-2'" readonly />
+		</div>
 
-    <div class="field">
-      <label>Current (A)</label>
-      <input type="number" [(ngModel)]="current" (input)="calculatePower()">
-    </div>
+		<div class="info-box">
+			<h3>How it works</h3>
+			<p>
+				Power is calculated by multiplying voltage and current. This basic electrical
+				formula is commonly used to estimate device load and system requirements.
+			</p>
+			<p>In AC systems, real power may depend on the power factor.</p>
+		</div>
+	</div>
 
-    <div class="field">
-      <label>Power (W)</label>
-      <input type="number" [value]="power | number:'1.0-2'" readonly>
-    </div>
+	<!-- ENERGY -->
+	<div *ngIf="category === 'energy'" class="card">
+		<div class="conversion-title">Energy Conversion</div>
 
-    <div class="info-box">
-      <h3>How it works</h3>
-      <p>
-        Power is calculated by multiplying voltage and current.
-        This basic electrical formula is commonly used to estimate
-        device load and system requirements.
-      </p>
-      <p>
-        In AC systems, real power may depend on the power factor.
-      </p>
-    </div>
+		<div class="row">
+			<input type="number" [(ngModel)]="energyValue" (input)="convertEnergy()" />
 
-  </div>
+			<select [(ngModel)]="energyFrom" (change)="convertEnergy()">
+				<option value="Wh">Wh</option>
+				<option value="kWh">kWh</option>
+			</select>
+		</div>
 
-  <!-- ENERGY -->
-  <div *ngIf="category==='energy'" class="card">
+		<div class="equals">=</div>
 
-    <div class="conversion-title">
-      Energy Conversion
-    </div>
+		<div class="row">
+			<input type="number" [value]="energyResult | number: '1.0-3'" readonly />
 
-    <div class="row">
-      <input type="number"
-             [(ngModel)]="energyValue"
-             (input)="convertEnergy()">
+			<select [(ngModel)]="energyTo" (change)="convertEnergy()">
+				<option value="Wh">Wh</option>
+				<option value="kWh">kWh</option>
+			</select>
+		</div>
 
-      <select [(ngModel)]="energyFrom" (change)="convertEnergy()">
-        <option value="Wh">Wh</option>
-        <option value="kWh">kWh</option>
-      </select>
-    </div>
-
-    <div class="equals">=</div>
-
-    <div class="row">
-      <input type="number" 
-             [value]="energyResult | number:'1.0-3'" 
-             readonly>
-
-      <select [(ngModel)]="energyTo" (change)="convertEnergy()">
-        <option value="Wh">Wh</option>
-        <option value="kWh">kWh</option>
-      </select>
-    </div>
-
-    <div class="info-box">
-      <h3>Energy Units</h3>
-      <p>
-        1 kilowatt-hour (kWh) equals 1000 watt-hours (Wh).
-      </p>
-      <p>
-        kWh is the standard unit used in electricity billing.
-      </p>
-      <p>
-        This conversion helps estimate battery capacity,
-        solar production, and overall energy consumption.
-      </p>
-    </div>
-
-  </div>
-
+		<div class="info-box">
+			<h3>Energy Units</h3>
+			<p>1 kilowatt-hour (kWh) equals 1000 watt-hours (Wh).</p>
+			<p>kWh is the standard unit used in electricity billing.</p>
+			<p>
+				This conversion helps estimate battery capacity, solar production, and overall
+				energy consumption.
+			</p>
+		</div>
+	</div>
 </div>

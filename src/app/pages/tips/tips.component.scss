@@ -1,187 +1,187 @@
 // Змінні кольорів (можна легко змінити під палітру вашого бренду)
 $primary-color: #2563eb; // Головний синій колір
-$bg-color: #f8fafc;      // Світло-сірий фон сторінки
-$card-bg: #ffffff;       // Білий фон карток
-$text-main: #1e293b;     // Темний колір для заголовків
-$text-muted: #64748b;    // Світліший колір для звичайного тексту
-$border-color: #e2e8f0;  // Колір ліній
-$hover-bg: #f1f5f9;      // Колір при наведенні мишки
+$bg-color: #f8fafc; // Світло-сірий фон сторінки
+$card-bg: #ffffff; // Білий фон карток
+$text-main: #1e293b; // Темний колір для заголовків
+$text-muted: #64748b; // Світліший колір для звичайного тексту
+$border-color: #e2e8f0; // Колір ліній
+$hover-bg: #f1f5f9; // Колір при наведенні мишки
 
 .tips-page-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 24px;
-  font-family: 'Inter', system-ui, sans-serif;
-  color: $text-main;
-  background-color: $bg-color;
-  min-height: 100vh;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 24px;
+	font-family: 'Inter', system-ui, sans-serif;
+	color: $text-main;
+	background-color: $bg-color;
+	min-height: 100vh;
 }
 
 /* --- 1. Hero Section (Шапка та пошук) --- */
 .hero-section {
-  text-align: center;
-  margin-bottom: 40px;
+	text-align: center;
+	margin-bottom: 40px;
 
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: $text-main;
-  }
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 8px;
+		color: $text-main;
+	}
 
-  .page-subtitle {
-    color: $text-muted;
-    font-size: 1.1rem;
-    margin-bottom: 24px;
-  }
+	.page-subtitle {
+		color: $text-muted;
+		font-size: 1.1rem;
+		margin-bottom: 24px;
+	}
 }
 
 .search-container {
-  max-width: 500px;
-  margin: 0 auto 24px;
+	max-width: 500px;
+	margin: 0 auto 24px;
 
-  .search-bar {
-    width: 100%;
-    padding: 14px 20px;
-    border: 2px solid $border-color;
-    border-radius: 99px; // Робить поле ідеально заокругленим
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s ease;
+	.search-bar {
+		width: 100%;
+		padding: 14px 20px;
+		border: 2px solid $border-color;
+		border-radius: 99px; // Робить поле ідеально заокругленим
+		font-size: 1rem;
+		outline: none;
+		transition: border-color 0.2s ease;
 
-    &:focus {
-      border-color: $primary-color;
-    }
-  }
+		&:focus {
+			border-color: $primary-color;
+		}
+	}
 }
 
 .filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
 
-  .chip {
-    padding: 8px 16px;
-    border: 1px solid $border-color;
-    background-color: $card-bg;
-    border-radius: 99px;
-    color: $text-main;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+	.chip {
+		padding: 8px 16px;
+		border: 1px solid $border-color;
+		background-color: $card-bg;
+		border-radius: 99px;
+		color: $text-main;
+		font-size: 0.9rem;
+		cursor: pointer;
+		transition: all 0.2s ease;
 
-    &:hover {
-      background-color: $hover-bg;
-    }
+		&:hover {
+			background-color: $hover-bg;
+		}
 
-    // Стиль для активної (обраної) кнопки
-    &.active {
-      background-color: $primary-color;
-      color: white;
-      border-color: $primary-color;
-    }
-  }
+		// Стиль для активної (обраної) кнопки
+		&.active {
+			background-color: $primary-color;
+			color: white;
+			border-color: $primary-color;
+		}
+	}
 }
 
 /* --- 2. Контент та Акордеони --- */
 .tips-content {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
 .tips-category {
-  .category-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: $text-main;
-    border-bottom: 2px solid $border-color;
-    padding-bottom: 8px;
-  }
+	.category-title {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-bottom: 16px;
+		color: $text-main;
+		border-bottom: 2px solid $border-color;
+		padding-bottom: 8px;
+	}
 }
 
 /* Стилі для самого акордеона (<details>) */
 .accordion-panel {
-  background: $card-bg;
-  border: 1px solid $border-color;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease;
+	background: $card-bg;
+	border: 1px solid $border-color;
+	border-radius: 12px;
+	margin-bottom: 12px;
+	overflow: hidden;
+	transition: box-shadow 0.2s ease;
 
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
+	&:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	}
 
-  // Коли картка розгорнута (наявний атрибут open)
-  &[open] {
-    .accordion-header {
-      border-bottom: 1px solid $border-color;
-      color: $primary-color;
+	// Коли картка розгорнута (наявний атрибут open)
+	&[open] {
+		.accordion-header {
+			border-bottom: 1px solid $border-color;
+			color: $primary-color;
 
-      // Поворот нашої кастомної стрілочки
-      &::after {
-        transform: rotate(180deg);
-      }
-    }
-  }
+			// Поворот нашої кастомної стрілочки
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+	}
 }
 
 /* Заголовок акордеона (<summary>) */
 .accordion-header {
-  padding: 16px 20px;
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  position: relative;
-  list-style: none; // Прибирає стандартний трикутник у більшості браузерів
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.2s;
+	padding: 16px 20px;
+	font-weight: 500;
+	font-size: 1rem;
+	cursor: pointer;
+	position: relative;
+	list-style: none; // Прибирає стандартний трикутник у більшості браузерів
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: background-color 0.2s;
 
-  // Прибирає маркер спеціально для Safari/Chrome
-  &::-webkit-details-marker {
-    display: none;
-  }
+	// Прибирає маркер спеціально для Safari/Chrome
+	&::-webkit-details-marker {
+		display: none;
+	}
 
-  &:hover {
-    background-color: $hover-bg;
-  }
+	&:hover {
+		background-color: $hover-bg;
+	}
 
-  // Створюємо свою власну красиву стрілочку
-  &::after {
-    content: "▼";
-    font-size: 0.8rem;
-    color: $text-muted;
-    transition: transform 0.3s ease; // Плавна анімація повороту
-  }
+	// Створюємо свою власну красиву стрілочку
+	&::after {
+		content: '▼';
+		font-size: 0.8rem;
+		color: $text-muted;
+		transition: transform 0.3s ease; // Плавна анімація повороту
+	}
 }
 
 /* Текст всередині акордеона */
 .accordion-body {
-  padding: 16px 20px;
-  color: $text-muted;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  background-color: $card-bg;
-  
-  p {
-    margin-bottom: 10px;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+	padding: 16px 20px;
+	color: $text-muted;
+	font-size: 0.95rem;
+	line-height: 1.6;
+	background-color: $card-bg;
 
-  strong {
-    color: $text-main;
-  }
+	p {
+		margin-bottom: 10px;
 
-  ul {
-    margin-left: 20px;
-    margin-top: 10px;
-  }
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	strong {
+		color: $text-main;
+	}
+
+	ul {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
 }
