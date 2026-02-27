@@ -1,7 +1,7 @@
 ### Contributing rules
 
 - Use **Conventional Commits**: `type(scope): subject`
-- Types: `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `style`, `chore`, `build`, `ci`, `revert`
+- Types: `feat`, `fix`, `refactor`, `perf`, `docs`, `style`, `chore`, `build`, `ci`, `revert`
 - Subject: **imperative**, present tense, **no period**, keep it short
 - One commit = **one logical change** (split big work into smaller commits)
 - Prefix private class variables with an underscore (e.g. \_cache, \_token, \_state) to clearly mark internal usage and avoid accidental external access.
@@ -10,4 +10,5 @@
 - Avoid hover effects that change layout (border/size/padding). Prefer non-layout effects (background tint, shadow) and always add matching :focus-visible styles.
 - Keep spacing and colors consistent (use Tailwind scale + existing design tokens; avoid ad-hoc pixel values unless unavoidable).
 - Document only public functions and variables with short, clear comments directly above their declarations (purpose + expected behavior).
-- Branch names must follow: {type}/{feature}/{team}-{issueId}. Use lowercase kebab-case. type must match Conventional Commit types (e.g. feat, fix, refactor). feature is the domain name (e.g. people, events). team is the responsible team name. Always append the GitHub issue number at the end.
+- Angular forms: use the `signals-based forms API only`. Import from `@angular/forms/signals` (e.g. `import { form, submit } from '@angular/forms/signals';`) and avoid non-signal forms patterns in new code.
+- Angular v20+ signal-first APIs: use function-based APIs instead of decorators wherever possible: input() (not @Input()), output() (not @Output()), viewChild()/viewChildren() (not @ViewChild()/@ViewChildren()), contentChild()/contentChildren() (not @ContentChild()/@ContentChildren()), and model() for two-way binding when appropriate; in templates use the new control flow (@if, @for, @switch) instead of *ngIf/*ngFor/*ngSwitch, and prefer signals with computed()/effect() for local state over manual subscription patterns unless RxJS interop is clearly needed.
