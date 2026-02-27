@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 const PSH_BY_REGION = {
   kyiv: 3.5,
@@ -41,96 +40,116 @@ function clamp(n: number, min: number, max: number) {
   return Math.min(Math.max(n, min), max);
 }
 
+function toNum(raw: string): number {
+  const n = Number(String(raw).replace(',', '.'));
+  return Number.isFinite(n) ? n : 0;
+}
+
 @Component({
   selector: 'app-solar-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './solar-calculator.component.html',
   styleUrl: './solar-calculator.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolarCalculatorComponent {
-  // ===== Inputs =====
-  // ✅ allow '' to show "Select region"
-  region: RegionKey | '' = '';
+  region = signal<RegionKey | ''>('');
 
-  consumption = 0;     // kWh/day
-  panelPowerW = 0;     // W
-  psh = 0;             // h/day
-  lossesPct = 0;       // %
-  tariff = 0;          // UAH/kWh
-  panelPrice = 0;      // UAH
-  inverterPrice = 0;   // UAH
+  consumption = signal(''); // kWh/day
+  panelPowerW = signal(''); // W
+  psh = signal(''); // h/day
+  lossesPct = signal(''); // %
+  tariff = signal(''); // UAH/kWh
+  panelPrice = signal(''); // UAH
+  inverterPrice = signal(''); // UAH
 
-  // ===== Outputs =====
-  outDaily = 0;
-  outSystemKw = 0;
-  outPanels = 0;
-  outMonthly = 0;
-  outYearly = 0;
-  outSavings = 0;
-  outPaybackYears = 0;
-  outPaybackMonths = 0;
+  backupHours = signal(''); // hours
+  dodPct = signal(''); // % depth of discharge (e.g. 80)
 
-  warning = '';
+  currentSystemKw = signal(''); // kW
+  currentPanels = signal(''); // count
 
-  // ✅ after reload we treat PSH as "manual", so no autofill until user picks region
-  private pshWasManuallyChanged = true;
+  systemType = signal<'on-grid' | 'off-grid' | 'hybrid'>('on-grid');
 
-  // HTML: (change)="onRegionChange()"
+  outDaily = signal(0);
+  outSystemKw = signal(0);
+  outPanels = signal(0);
+  outMonthly = signal(0);
+  outYearly = signal(0);
+  outSavings = signal(0);
+  outPaybackYears = signal(0);
+  outPaybackMonths = signal(0);
+
+  outBatteryKwh = signal(0); // Required battery size
+
+  outDeltaKw = signal(0); // calculated - current
+  outDeltaPanels = signal(0);
+
+  warning = signal('');
+
+  private pshWasManuallyChanged = signal(true);
+
   onRegionChange() {
-    // user picked region -> allow autofill now
-    this.pshWasManuallyChanged = false;
+    this.pshWasManuallyChanged.set(false);
     this.applyRegionPSH();
   }
 
-  // HTML: (input)="onPSHManualChange()"
   onPSHManualChange() {
-    this.pshWasManuallyChanged = true;
+    this.pshWasManuallyChanged.set(true);
   }
 
   private applyRegionPSH() {
-    if (this.pshWasManuallyChanged) return;
-    if (!this.region) return;
+    if (this.pshWasManuallyChanged()) return;
+    const region = this.region();
+    if (!region) return;
 
-    const suggested = PSH_BY_REGION[this.region];
-    if (suggested != null) this.psh = suggested;
+    const suggested = PSH_BY_REGION[region];
+    if (suggested != null) this.psh.set(String(suggested));
   }
 
   private clearOutputs() {
-    this.outDaily = 0;
-    this.outSystemKw = 0;
-    this.outPanels = 0;
-    this.outMonthly = 0;
-    this.outYearly = 0;
-    this.outSavings = 0;
-    this.outPaybackYears = 0;
-    this.outPaybackMonths = 0;
+    this.outDaily.set(0);
+    this.outSystemKw.set(0);
+    this.outPanels.set(0);
+    this.outMonthly.set(0);
+    this.outYearly.set(0);
+    this.outSavings.set(0);
+    this.outPaybackYears.set(0);
+    this.outPaybackMonths.set(0);
+    this.outBatteryKwh.set(0);
+    this.outDeltaKw.set(0);
+    this.outDeltaPanels.set(0);
   }
 
   calculate() {
-    const consumption = Math.max(0, Number(this.consumption) || 0);
-    const panelPowerW = Math.max(0, Number(this.panelPowerW) || 0);
-    const psh = Math.max(0, Number(this.psh) || 0);
-    const lossesPct = clamp(Number(this.lossesPct) || 0, 0, 90);
-    const tariff = Math.max(0, Number(this.tariff) || 0);
-    const panelPrice = Math.max(0, Number(this.panelPrice) || 0);
-    const inverterPrice = Math.max(0, Number(this.inverterPrice) || 0);
+    const consumption = Math.max(0, toNum(this.consumption())); // kWh/day
+    const panelPowerW = Math.max(0, toNum(this.panelPowerW())); // W
+    const psh = Math.max(0, toNum(this.psh())); // h/day
+    const lossesPct = clamp(toNum(this.lossesPct()), 0, 90);
+    const tariff = Math.max(0, toNum(this.tariff()));
+    const panelPrice = Math.max(0, toNum(this.panelPrice()));
+    const inverterPrice = Math.max(0, toNum(this.inverterPrice()));
+
+    const backupHours = clamp(toNum(this.backupHours()), 0, 168);
+    const dodPct = clamp(toNum(this.dodPct()) || 0, 0, 100);
+
+    const currentKw = Math.max(0, toNum(this.currentSystemKw()));
+    const currentPanels = Math.max(0, Math.floor(toNum(this.currentPanels())));
 
     const eff = 1 - lossesPct / 100;
 
-    // Warning text (optional)
-    this.warning = '';
+    this.warning.set('');
     if (lossesPct >= 35) {
-      this.warning =
-        'Losses are very high — check wiring, tilt angle, shading, or inverter efficiency.';
+      this.warning.set(
+        'Losses are very high — check wiring, tilt angle, shading, or inverter efficiency.'
+      );
     } else if (psh > 0 && psh < 2.5) {
-      this.warning = 'Low PSH — double-check your region selection or PSH value.';
+      this.warning.set('Low PSH — double-check your region selection or PSH value.');
     } else if (consumption === 0) {
-      this.warning = 'Enter your average daily consumption to get a correct estimate.';
+      this.warning.set('Enter your average daily consumption to get a correct estimate.');
     }
 
-    // Essential inputs missing -> outputs = 0
     if (consumption === 0 || panelPowerW === 0 || psh === 0 || eff <= 0) {
       this.clearOutputs();
       return;
@@ -149,36 +168,55 @@ export class SolarCalculatorComponent {
 
     const paybackYears = totalCost > 0 && savings > 0 ? totalCost / savings : 0;
 
-    this.outDaily = daily;
-    this.outSystemKw = actualSystemKw;
-    this.outPanels = panels;
-    this.outMonthly = monthly;
-    this.outYearly = yearly;
-    this.outSavings = savings;
-    this.outPaybackYears = paybackYears;
-    this.outPaybackMonths = paybackYears * 12;
+    let batteryKwh = 0;
+    if (backupHours > 0) {
+      const dod = dodPct > 0 ? dodPct / 100 : 0; // if not provided -> can't estimate
+      batteryKwh = dod > 0 ? (consumption * (backupHours / 24)) / dod : 0;
+    }
+
+    const deltaKw = currentKw > 0 ? actualSystemKw - currentKw : 0;
+    const deltaPanels = currentPanels > 0 ? panels - currentPanels : 0;
+
+    this.outDaily.set(daily);
+    this.outSystemKw.set(actualSystemKw);
+    this.outPanels.set(panels);
+    this.outMonthly.set(monthly);
+    this.outYearly.set(yearly);
+    this.outSavings.set(savings);
+    this.outPaybackYears.set(paybackYears);
+    this.outPaybackMonths.set(paybackYears * 12);
+
+    this.outBatteryKwh.set(batteryKwh);
+
+    this.outDeltaKw.set(deltaKw);
+    this.outDeltaPanels.set(deltaPanels);
   }
 
-  // Reset => everything becomes 0 and region becomes "Select region"
   resetAll() {
-    this.region = '';
+    this.region.set('');
 
-    this.consumption = 0;
-    this.panelPowerW = 0;
-    this.psh = 0;
-    this.lossesPct = 0;
-    this.tariff = 0;
-    this.panelPrice = 0;
-    this.inverterPrice = 0;
+    this.consumption.set('');
+    this.panelPowerW.set('');
+    this.psh.set('');
+    this.lossesPct.set('');
+    this.tariff.set('');
+    this.panelPrice.set('');
+    this.inverterPrice.set('');
 
-    // keep PSH manual to avoid autofill until user selects region again
-    this.pshWasManuallyChanged = true;
+    this.backupHours.set('');
+    this.dodPct.set('');
 
-    this.warning = '';
+    this.currentSystemKw.set('');
+    this.currentPanels.set('');
+
+    this.systemType.set('on-grid');
+
+    this.pshWasManuallyChanged.set(true);
+
+    this.warning.set('');
     this.clearOutputs();
   }
 
-  // ✅ after page reload -> everything is 0 + Select region
   ngOnInit() {
     this.resetAll();
   }

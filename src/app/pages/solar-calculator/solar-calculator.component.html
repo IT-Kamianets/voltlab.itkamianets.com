@@ -1,175 +1,350 @@
-<header>
-  <h1>Solar Calculator</h1>
-</header>
+<div class="page">
+  <header class="page__header">
+    <h1 class="page__title">Solar Calculator</h1>
+  </header>
 
-<main class="container main">
-  <!-- LEFT -->
-  <section class="card">
-    <div class="card__title">System Configuration</div>
+  <main class="container main">
+    <!-- LEFT -->
+    <section class="card">
+      <div class="card__title">System Configuration</div>
 
-    <div class="accordion">
-      <div class="acc">
-        <div class="acc__head">🏠 Your System Setup</div>
+      <div class="accordion">
+        <div class="acc">
+          <div class="acc__head">🏠 Your System Setup</div>
 
-        <div class="acc__body">
-          <div class="field">
-            <label>Average Daily Energy Consumption (kWh/day):</label>
-            <input type="number" [(ngModel)]="consumption" />
+          <div class="acc__body">
+            <div class="fieldRow">
+              <div class="field field--half">
+                <label
+                  class="field__label"
+                  title="Average Daily Energy Consumption (kWh/day):"
+                >
+                  Consumption:
+                </label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="decimal"
+                  placeholder="Fill kWh/day…"
+                  [value]="consumption()"
+                  (input)="consumption.set($any($event.target).value)"
+                />
+              </div>
+
+              <div class="field field--half">
+                <label class="field__label" title="Solar Panel Power Rating (W):">
+                  Power rating:
+                </label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="numeric"
+                  placeholder="e.g. 450 W…"
+                  [value]="panelPowerW()"
+                  (input)="panelPowerW.set($any($event.target).value)"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <h2 class="sistem">System Type:</h2>
+
+              <div class="chips">
+                <label class="chip">
+                  On-Grid
+                  <input
+                    class="chip__radio"
+                    type="radio"
+                    name="type"
+                    value="on-grid"
+                    [checked]="systemType() === 'on-grid'"
+                    (change)="systemType.set('on-grid')"
+                  />
+                </label>
+
+                <label class="chip">
+                  Off-Grid
+                  <input
+                    class="chip__radio"
+                    type="radio"
+                    name="type"
+                    value="off-grid"
+                    [checked]="systemType() === 'off-grid'"
+                    (change)="systemType.set('off-grid')"
+                  />
+                </label>
+
+                <label class="chip">
+                  Hybrid
+                  <input
+                    class="chip__radio"
+                    type="radio"
+                    name="type"
+                    value="hybrid"
+                    [checked]="systemType() === 'hybrid'"
+                    (change)="systemType.set('hybrid')"
+                  />
+                </label>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="field">
-            <label>Solar Panel Power Rating (W):</label>
-            <input type="number" [(ngModel)]="panelPowerW" />
+        <div class="acc">
+          <div class="acc__head">☀️ Solar Conditions</div>
+
+          <div class="acc__body">
+            <div class="field">
+              <label class="field__label">Region:</label>
+
+              <select
+                class="control"
+                [value]="region()"
+                (change)="region.set($any($event.target).value); onRegionChange()"
+              >
+                <option value="" disabled>Select region</option>
+                <option value="khmelnytskyi">Khmelnytskyi Region</option>
+                <option value="vinnytsia">Vinnytsia Region</option>
+                <option value="volyn">Volyn Region</option>
+                <option value="dnipropetrovsk">Dnipropetrovsk Region</option>
+                <option value="donetsk">Donetsk Region</option>
+                <option value="zhytomyr">Zhytomyr Region</option>
+                <option value="zakarpattia">Zakarpattia Region</option>
+                <option value="zaporizhzhia">Zaporizhzhia Region</option>
+                <option value="ivano-frankivsk">Ivano-Frankivsk Region</option>
+                <option value="kyiv">Kyiv Region</option>
+                <option value="kirovohrad">Kirovohrad Region</option>
+                <option value="luhansk">Luhansk Region</option>
+                <option value="lviv">Lviv Region</option>
+                <option value="mykolaiv">Mykolaiv Region</option>
+                <option value="odesa">Odesa Region</option>
+                <option value="poltava">Poltava Region</option>
+                <option value="rivne">Rivne Region</option>
+                <option value="sumy">Sumy Region</option>
+                <option value="ternopil">Ternopil Region</option>
+                <option value="kharkiv">Kharkiv Region</option>
+                <option value="kherson">Kherson Region</option>
+                <option value="cherkasy">Cherkasy Region</option>
+                <option value="chernivtsi">Chernivtsi Region</option>
+                <option value="chernihiv">Chernihiv Region</option>
+                <option value="crimea">Crimea</option>
+                <option value="kyiv-city">Kyiv City</option>
+                <option value="sevastopol">Sevastopol</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" title="Peak Sun Hours (PSH):">PSH:</label>
+              <input
+                class="control"
+                type="number"
+                step="0.1"
+                inputmode="decimal"
+                placeholder="e.g. 3.5…"
+                [value]="psh()"
+                (input)="psh.set($any($event.target).value); onPSHManualChange()"
+              />
+            </div>
           </div>
+        </div>
 
-          <div class="field">
-            <h2 class="sistem">System Type:</h2>
+        <div class="acc">
+          <div class="acc__head">📉 System Losses</div>
 
-            <div class="chips">
-              <label class="chip">
-                On-Grid System
-                <input class="radio" type="radio" name="type" value="on-grid" />
-              </label>
+          <div class="acc__body">
+            <div class="field">
+              <label class="field__label">Losses (%):</label>
+              <input
+                class="control"
+                type="number"
+                inputmode="decimal"
+                placeholder="e.g. 15…"
+                [value]="lossesPct()"
+                (input)="lossesPct.set($any($event.target).value)"
+              />
+            </div>
+          </div>
+        </div>
 
-              <label class="chip">
-                Off-Grid System
-                <input class="radio" type="radio" name="type" value="off-grid" />
-              </label>
+        <div class="acc">
+          <div class="acc__head">💰 Cost Parameters</div>
 
-              <label class="chip">
-                Hybrid System
-                <input class="radio" type="radio" name="type" value="hybrid" />
-              </label>
+          <div class="acc__body">
+            <div class="field">
+              <label class="field__label">Tariff (UAH/kWh):</label>
+              <input
+                class="control"
+                type="number"
+                inputmode="decimal"
+                placeholder="e.g. 4.32…"
+                [value]="tariff()"
+                (input)="tariff.set($any($event.target).value)"
+              />
+            </div>
+
+            <div class="field">
+              <label class="field__label">Panel cost (UAH):</label>
+              <input
+                class="control"
+                type="number"
+                inputmode="numeric"
+                placeholder="e.g. 4500…"
+                [value]="panelPrice()"
+                (input)="panelPrice.set($any($event.target).value)"
+              />
+            </div>
+
+            <div class="field">
+              <label class="field__label">Inverter cost (UAH):</label>
+              <input
+                class="control"
+                type="number"
+                inputmode="numeric"
+                placeholder="e.g. 25000…"
+                [value]="inverterPrice()"
+                (input)="inverterPrice.set($any($event.target).value)"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <div class="acc__head">🔋 Battery / Backup</div>
+
+          <div class="acc__body">
+            <div class="fieldRow">
+              <div class="field field--half">
+                <label class="field__label" title="Backup duration (hours):">Backup (h):</label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="numeric"
+                  placeholder="e.g. 12…"
+                  [value]="backupHours()"
+                  (input)="backupHours.set($any($event.target).value)"
+                />
+              </div>
+
+              <div class="field field--half">
+                <label class="field__label" title="Depth of discharge (DoD %)">
+                  DoD (%):
+                </label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="decimal"
+                  placeholder="e.g. 80…"
+                  [value]="dodPct()"
+                  (input)="dodPct.set($any($event.target).value)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <div class="acc__head">🛠 Optimize Existing System</div>
+
+          <div class="acc__body">
+            <div class="fieldRow">
+              <div class="field field--half">
+                <label class="field__label" title="Current installed capacity (kW):">
+                  Current kW:
+                </label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="decimal"
+                  placeholder="e.g. 3.6…"
+                  [value]="currentSystemKw()"
+                  (input)="currentSystemKw.set($any($event.target).value)"
+                />
+              </div>
+
+              <div class="field field--half">
+                <label class="field__label" title="Current number of panels:">
+                  Current panels:
+                </label>
+                <input
+                  class="control control--full"
+                  type="number"
+                  inputmode="numeric"
+                  placeholder="e.g. 8…"
+                  [value]="currentPanels()"
+                  (input)="currentPanels.set($any($event.target).value)"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="acc">
-        <div class="acc__head">☀️ Solar Conditions</div>
+    <!-- right -->
+    <section class="card">
+      <div class="card__title">Calculation Results</div>
 
-        <div class="acc__body">
-          <div class="field">
-            <label>Installation Region:</label>
-
-            <select [(ngModel)]="region" (change)="onRegionChange()">
-              <option value="" disabled>Select region</option>
-
-              <option value="khmelnytskyi">Khmelnytskyi Region</option>
-              <option value="vinnytsia">Vinnytsia Region</option>
-              <option value="volyn">Volyn Region</option>
-              <option value="dnipropetrovsk">Dnipropetrovsk Region</option>
-              <option value="donetsk">Donetsk Region</option>
-              <option value="zhytomyr">Zhytomyr Region</option>
-              <option value="zakarpattia">Zakarpattia Region</option>
-              <option value="zaporizhzhia">Zaporizhzhia Region</option>
-              <option value="ivano-frankivsk">Ivano-Frankivsk Region</option>
-              <option value="kyiv">Kyiv Region</option>
-              <option value="kirovohrad">Kirovohrad Region</option>
-              <option value="luhansk">Luhansk Region</option>
-              <option value="lviv">Lviv Region</option>
-              <option value="mykolaiv">Mykolaiv Region</option>
-              <option value="odesa">Odesa Region</option>
-              <option value="poltava">Poltava Region</option>
-              <option value="rivne">Rivne Region</option>
-              <option value="sumy">Sumy Region</option>
-              <option value="ternopil">Ternopil Region</option>
-              <option value="kharkiv">Kharkiv Region</option>
-              <option value="kherson">Kherson Region</option>
-              <option value="cherkasy">Cherkasy Region</option>
-              <option value="chernivtsi">Chernivtsi Region</option>
-              <option value="chernihiv">Chernihiv Region</option>
-              <option value="crimea">Crimea</option>
-              <option value="kyiv-city">Kyiv City</option>
-              <option value="sevastopol">Sevastopol</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Peak Sun Hours (PSH):</label>
-            <input
-              type="number"
-              step="0.1"
-              [(ngModel)]="psh"
-              (input)="onPSHManualChange()"
-            />
-          </div>
-        </div>
+      <div class="big">
+        Daily production:
+        ≈ <span>{{ outDaily() | number : "1.0-1" }}</span> kWh/day
       </div>
 
-      <div class="acc">
-        <div class="acc__head">📉 System Losses</div>
-
-        <div class="acc__body">
-          <div class="field">
-            <label>Estimated Energy Loss (%):</label>
-            <input type="number" [(ngModel)]="lossesPct" />
-          </div>
-        </div>
+      <div class="resultRow">
+        Required system capacity:
+        <b><span>{{ outSystemKw() | number : "1.0-2" }}</span> kW</b>
       </div>
 
-      <div class="acc">
-        <div class="acc__head">💰 Cost Parameters</div>
-
-        <div class="acc__body">
-          <div class="field">
-            <label>Electricity Tariff (UAH/kWh):</label>
-            <input type="number" [(ngModel)]="tariff" />
-          </div>
-
-          <div class="field">
-            <label>Solar Panel Cost (UAH):</label>
-            <input type="number" [(ngModel)]="panelPrice" />
-          </div>
-
-          <div class="field">
-            <label>Inverter Cost (UAH):</label>
-            <input type="number" [(ngModel)]="inverterPrice" />
-          </div>
-        </div>
+      <div class="resultRow">
+        Panels needed:
+        <b><span>{{ outPanels() }}</span></b>
       </div>
-    </div>
-  </section>
 
-  <!-- RIGHT -->
-  <section class="card">
-    <div class="card__title">Calculation Results</div>
+      <div class="resultRow">
+        Monthly production:
+        <b><span>{{ outMonthly() | number : "1.0-0" }}</span></b>
+      </div>
 
-    <div class="big">
-      Estimated Daily Energy Production:
-      ≈ <span>{{ outDaily | number : "1.0-1" }}</span> kWh/day
-    </div>
+      <div class="resultRow">
+        Annual production:
+        <b><span>{{ outYearly() | number : "1.0-0" }}</span></b>
+      </div>
 
-    <div class="resultRow">
-      Required System Capacity:
-      <b><span>{{ outSystemKw | number : "1.0-2" }}</span> kW</b>
-    </div>
+      <div class="resultRow">
+        Estimated savings / year:
+        <b><span>{{ outSavings() | number : "1.0-0" }}</span></b>
+      </div>
 
-    <div class="resultRow">
-      Number of Solar Panels: <b><span>{{ outPanels }}</span></b>
-    </div>
+      <div class="resultRow">
+        Payback:
+        <span>{{ outPaybackYears() | number : "1.0-1" }}</span> years —
+        <b><span>{{ outPaybackMonths() | number : "1.0-0" }}</span></b> months
+      </div>
 
-    <div class="resultRow">
-      Monthly Energy Production: <b><span>{{ outMonthly | number : "1.0-0" }}</span></b>
-    </div>
+      <div class="resultRow">
+        Required battery size:
+        <b><span>{{ outBatteryKwh() | number : "1.0-1" }}</span> kWh</b>
+      </div>
 
-    <div class="resultRow">
-      Annual Energy Production: <b><span>{{ outYearly | number : "1.0-0" }}</span></b>
-    </div>
+      @if (currentSystemKw() || currentPanels()) {
+        <div class="resultRow">
+          <b>Optimization:</b>
+          <span>
+            Δ kW:
+            <b>{{ outDeltaKw() | number : "1.0-2" }}</b>,
+            Δ panels:
+            <b>{{ outDeltaPanels() }}</b>
+          </span>
+        </div>
+      }
 
-    <div class="resultRow">
-      Estimated Cost Savings: <b><span>{{ outSavings | number : "1.0-0" }}</span></b>
-    </div>
+      @if (warning()) {
+        <div class="resultRow">
+          <b>⚠️ {{ warning() }}</b>
+        </div>
+      }
 
-    <div class="resultRow">
-      <p>
-        Payback Period:
-        <span>{{ outPaybackYears | number : "1.0-1" }}</span> years
-         - <span><b>{{ outPaybackMonths | number : "1.0-0" }}</b></span> months
-      </p>
-    </div>
-
-    <button type="button" (click)="calculate()">Calculate System</button>
-    <button id="btnres" type="button" (click)="resetAll()">Reset Inputs</button>
-  </section>
-</main>
+      <button class="btn" type="button" (click)="calculate()">Calculate System</button>
+      <button class="btn" type="button" (click)="resetAll()">Reset Inputs</button>
+    </section>
+  </main>
+</div>
