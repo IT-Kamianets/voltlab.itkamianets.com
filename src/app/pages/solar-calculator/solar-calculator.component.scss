@@ -4,7 +4,6 @@
   font-family: var(--ff-base);
   font-size: var(--fs);
   letter-spacing: var(--letter-spacing);
-  background: var(--c-bg-secondary);
   color: var(--c-text-primary);
 }
 
@@ -13,7 +12,6 @@
   background: var(--c-bg-primary);
   color: var(--c-text-primary);
   padding: var(--sp-4) 0;
-  border-bottom: 1px solid var(--c-border);
 }
 
 .page__title {
@@ -29,7 +27,6 @@
   width: 95%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--sp-4);
 }
 
 .main {
@@ -189,7 +186,7 @@
   font-weight: 800;
   cursor: pointer;
   transition: transform var(--motion-fast) var(--easing),
-    filter var(--motion-fast) var(--easing),
+  filter var(--motion-fast) var(--easing),
     box-shadow var(--motion-fast) var(--easing);
 }
 
