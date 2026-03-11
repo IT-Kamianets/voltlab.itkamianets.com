@@ -1,0 +1,243 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: var(--ff-base);
+  font-size: var(--fs);
+  letter-spacing: var(--letter-spacing);
+  background: var(--c-bg-secondary);
+  color: var(--c-text-primary);
+}
+
+/* Header */
+.page__header {
+  background: var(--c-bg-primary);
+  color: var(--c-text-primary);
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.page__title {
+  width: 95%;
+  max-width: var(--container);
+  margin: 0 auto;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Layout */
+.container {
+  width: 95%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--sp-4);
+}
+
+.main {
+  display: flex;
+  gap: var(--gutter);
+  align-items: flex-start;
+}
+
+/* Cards */
+.card {
+  background: var(--c-bg-primary);
+  border-radius: var(--radius-card);
+  padding: var(--sp-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--c-border);
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--c-border);
+}
+
+/* Accordion */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.acc {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--c-bg-primary);
+}
+
+.acc__head {
+  background: var(--c-bg-tertiary);
+  color: var(--c-text-primary);
+  padding: var(--sp-3);
+  font-weight: 700;
+}
+
+.acc__body {
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* Fields */
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.field__label {
+  font-size: 14px;
+  color: var(--c-text-secondary);
+}
+
+.fieldRow {
+  display: flex;
+  gap: var(--sp-3);
+}
+
+.field--half {
+  flex: 1 1 50%;
+}
+
+/* Controls */
+.control {
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-primary);
+  color: var(--c-text-primary);
+  width: 180px;
+  transition: box-shadow var(--motion-fast) var(--easing),
+    border-color var(--motion-fast) var(--easing);
+}
+
+.control--full {
+  width: 100%;
+}
+
+.control::placeholder {
+  color: var(--c-placeholder);
+}
+
+.control:focus {
+  outline: none;
+}
+
+.control:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* Chips */
+.sistem {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--c-text-secondary);
+}
+
+.chips {
+  display: flex;
+  gap: var(--sp-2);
+  font-size: 14px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-btn);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--c-bg-primary);
+}
+
+.chip__radio {
+  accent-color: var(--c-primary);
+}
+
+/* Results */
+.big {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  border: 1px solid var(--c-border);
+  padding: var(--sp-3);
+  border-radius: var(--radius-card);
+  background: var(--c-bg-primary);
+}
+
+/* Buttons */
+.btn {
+  background: var(--c-primary);
+  color: #fff;
+  border: none;
+  padding: var(--sp-3);
+  border-radius: var(--radius-btn);
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--motion-fast) var(--easing),
+    filter var(--motion-fast) var(--easing),
+    box-shadow var(--motion-fast) var(--easing);
+}
+
+.btn:hover {
+  background: var(--c-primary-hover);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .control {
+    width: 100%;
+  }
+
+  .fieldRow {
+    width: 100%;
+  }
+
+  .chips {
+    flex-direction: column;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

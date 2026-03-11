@@ -1,0 +1,91 @@
+@if (ready()) {
+	<div class="app">
+		<header class="app__topbar">
+			<a class="app__logo" routerLink="/" (click)="closeSidebar()">
+				<span class="app__logo-text">{{ logoText }}</span>
+			</a>
+
+			<div class="app__title">{{ pageTitle() }}</div>
+
+			<button class="app__iconbtn" type="button" (click)="onThemeToggle()" aria-label="Theme">
+				<span class="material-icons">
+					{{ theme.theme() === 'dark' ? 'dark_mode' : 'light_mode' }}
+				</span>
+			</button>
+		</header>
+
+		<main class="app__content">
+			<router-outlet></router-outlet>
+		</main>
+
+		<footer class="app__footer" role="navigation" aria-label="Primary">
+			@for (item of footerItems; track item.path) {
+				<a
+					class="app__navbtn"
+					[routerLink]="item.path"
+					routerLinkActive="app__navbtn--active"
+					(click)="closeSidebar()"
+				>
+					<span class="material-icons app__navicon">{{ item.icon }}</span>
+					<span class="app__navlabel">{{ item.label }}</span>
+				</a>
+			}
+
+			<button class="app__navbtn app__navbtn--burger" type="button" (click)="toggleSidebar()">
+				<span class="material-icons app__navicon">menu</span>
+				<span class="app__navlabel">Menu</span>
+			</button>
+		</footer>
+
+		@if (sidebarOpen()) {
+			<div class="app__overlay" (click)="closeSidebar()" aria-hidden="true"></div>
+
+			<aside class="app__sidebar" role="dialog" aria-label="Menu">
+				<div class="app__sidebar-head">
+					<div class="app__sidebar-title">Menu</div>
+					<button
+						class="app__iconbtn"
+						type="button"
+						(click)="closeSidebar()"
+						aria-label="Close"
+					>
+						<span class="material-icons">close</span>
+					</button>
+				</div>
+
+				<nav class="app__sidebar-nav">
+					@for (item of sidebarItems; track item.path) {
+						<a
+							class="app__sideitem"
+							[routerLink]="item.path"
+							routerLinkActive="app__sideitem--active"
+						>
+							<span class="material-icons app__sideicon">{{ item.icon }}</span>
+							<span class="app__sidelabel">{{ item.label }}</span>
+						</a>
+					}
+
+					<div class="app__side-sep"></div>
+
+					<button
+						class="app__sideitem"
+						type="button"
+						(click)="onThemeToggle()"
+						aria-label="Theme"
+					>
+						<span class="material-icons app__sideicon">
+							{{ theme.theme() === 'dark' ? 'dark_mode' : 'light_mode' }}
+						</span>
+						<span class="app__sidelabel">
+							Theme: {{ theme.theme() === 'dark' ? 'Dark' : 'Light' }}
+						</span>
+					</button>
+				</nav>
+			</aside>
+		}
+	</div>
+} @else {
+	<div class="app__boot" role="status" aria-label="Loading">
+		<div class="app__spinner"></div>
+	</div>
+}
