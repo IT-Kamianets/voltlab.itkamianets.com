@@ -32,6 +32,7 @@ export class AppComponent {
 
 	protected readonly sidebarItems: AppNavItem[] = [
 		{ path: '/', label: 'Home', icon: 'home' },
+		{ path: '/settings', label: 'Settings', icon: 'settings' },
 		{ path: '/about', label: 'About', icon: 'info' },
 		{ path: '/battery-usage', label: 'Battery usage', icon: 'battery_full' },
 		{ path: '/tips', label: 'Tips', icon: 'lightbulb' },

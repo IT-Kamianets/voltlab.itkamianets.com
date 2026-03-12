@@ -56,9 +56,10 @@
 				<nav class="app__sidebar-nav">
 					@for (item of sidebarItems; track item.path) {
 						<a
-							class="app__sideitem"
-							[routerLink]="item.path"
+							[routerLinkActiveOptions]="{ exact: true }"
 							routerLinkActive="app__sideitem--active"
+							[routerLink]="item.path"
+							class="app__sideitem"
 						>
 							<span class="material-icons app__sideicon">{{ item.icon }}</span>
 							<span class="app__sidelabel">{{ item.label }}</span>
