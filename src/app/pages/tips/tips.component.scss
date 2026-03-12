@@ -1,19 +1,37 @@
-// Змінні кольорів (можна легко змінити під палітру вашого бренду)
-$primary-color: #2563eb; // Головний синій колір
-$bg-color: #f8fafc; // Світло-сірий фон сторінки
-$card-bg: #ffffff; // Білий фон карток
-$text-main: #1e293b; // Темний колір для заголовків
-$text-muted: #64748b; // Світліший колір для звичайного тексту
-$border-color: #e2e8f0; // Колір ліній
-$hover-bg: #f1f5f9; // Колір при наведенні мишки
+﻿/* Tips page: uses global design tokens from src/styles.css (:root) */
+:host {
+	--tips-primary: var(--c-primary);
+	--tips-bg: var(--c-bg-primary);
+	--tips-surface: var(--c-bg-secondary);
+	--tips-hover: var(--c-bg-tertiary);
+	--tips-border: var(--c-border);
+
+	--tips-text: var(--c-text-secondary);
+	--tips-muted: var(--c-text-muted);
+
+	--tips-font-family: var(--ff-base);
+
+	--tips-max-width: min(800px, var(--container));
+	--tips-page-padding: var(--sp-6);
+
+	/* Keep rounding for Tips page (global tokens currently set to 0px). */
+	--tips-radius-md: 12px;
+	--tips-radius-pill: 999px;
+
+	--tips-shadow-hover: var(--shadow-md);
+	--tips-transition: var(--motion-fast) var(--easing);
+	--tips-focus-ring: var(--focus-ring);
+
+	display: block;
+}
 
 .tips-page-container {
-	max-width: 800px;
+	max-width: var(--tips-max-width);
 	margin: 0 auto;
-	padding: 24px;
-	font-family: 'Inter', system-ui, sans-serif;
-	color: $text-main;
-	background-color: $bg-color;
+	padding: var(--tips-page-padding);
+	font-family: var(--tips-font-family);
+	color: var(--tips-text);
+	background-color: var(--tips-bg);
 	min-height: 100vh;
 }
 
@@ -26,11 +44,11 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 		font-size: 2.5rem;
 		font-weight: 700;
 		margin-bottom: 8px;
-		color: $text-main;
+		color: var(--tips-text);
 	}
 
 	.page-subtitle {
-		color: $text-muted;
+		color: var(--tips-muted);
 		font-size: 1.1rem;
 		margin-bottom: 24px;
 	}
@@ -43,14 +61,17 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 	.search-bar {
 		width: 100%;
 		padding: 14px 20px;
-		border: 2px solid $border-color;
-		border-radius: 99px; // Робить поле ідеально заокругленим
+		border: 2px solid var(--tips-border);
+		border-radius: var(--tips-radius-pill);
 		font-size: 1rem;
 		outline: none;
-		transition: border-color 0.2s ease;
+		background-color: var(--tips-surface);
+		color: var(--tips-text);
+		transition: border-color var(--tips-transition), box-shadow var(--tips-transition);
 
 		&:focus {
-			border-color: $primary-color;
+			border-color: var(--tips-primary);
+			box-shadow: var(--tips-focus-ring);
 		}
 	}
 }
@@ -63,32 +84,38 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 
 	.chip {
 		padding: 8px 16px;
-		border: 1px solid $border-color;
-		background-color: $card-bg;
-		border-radius: 99px;
-		color: $text-main;
+		border: 1px solid var(--tips-border);
+		background-color: var(--tips-surface);
+		border-radius: var(--tips-radius-pill);
+		color: var(--tips-text);
 		font-size: 0.9rem;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background-color var(--tips-transition), border-color var(--tips-transition),
+			color var(--tips-transition);
 
 		&:hover {
-			background-color: $hover-bg;
+			background-color: var(--tips-hover);
 		}
 
-		// Стиль для активної (обраної) кнопки
 		&.active {
-			background-color: $primary-color;
-			color: white;
-			border-color: $primary-color;
+			background-color: var(--tips-primary);
+			color: #ffffff;
+			border-color: var(--tips-primary);
 		}
 	}
 }
 
-/* --- 2. Контент та Акордеони --- */
+/* --- 2. Контент та акордеони --- */
 .tips-content {
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
+}
+
+.empty-state {
+	text-align: center;
+	color: var(--tips-muted);
+	margin-top: 40px;
 }
 
 .tips-category {
@@ -96,32 +123,29 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 		font-size: 1.25rem;
 		font-weight: 600;
 		margin-bottom: 16px;
-		color: $text-main;
-		border-bottom: 2px solid $border-color;
+		color: var(--tips-text);
+		border-bottom: 2px solid var(--tips-border);
 		padding-bottom: 8px;
 	}
 }
 
-/* Стилі для самого акордеона (<details>) */
 .accordion-panel {
-	background: $card-bg;
-	border: 1px solid $border-color;
-	border-radius: 12px;
+	background: var(--tips-surface);
+	border: 1px solid var(--tips-border);
+	border-radius: var(--tips-radius-md);
 	margin-bottom: 12px;
 	overflow: hidden;
-	transition: box-shadow 0.2s ease;
+	transition: box-shadow var(--tips-transition), border-color var(--tips-transition);
 
 	&:hover {
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		box-shadow: var(--tips-shadow-hover);
 	}
 
-	// Коли картка розгорнута (наявний атрибут open)
 	&[open] {
 		.accordion-header {
-			border-bottom: 1px solid $border-color;
-			color: $primary-color;
+			border-bottom: 1px solid var(--tips-border);
+			color: var(--tips-primary);
 
-			// Поворот нашої кастомної стрілочки
 			&::after {
 				transform: rotate(180deg);
 			}
@@ -129,44 +153,43 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 	}
 }
 
-/* Заголовок акордеона (<summary>) */
 .accordion-header {
 	padding: 16px 20px;
 	font-weight: 500;
 	font-size: 1rem;
 	cursor: pointer;
 	position: relative;
-	list-style: none; // Прибирає стандартний трикутник у більшості браузерів
+	list-style: none;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	transition: background-color 0.2s;
+	transition: background-color var(--tips-transition), color var(--tips-transition);
 
-	// Прибирає маркер спеціально для Safari/Chrome
 	&::-webkit-details-marker {
 		display: none;
 	}
 
 	&:hover {
-		background-color: $hover-bg;
+		background-color: var(--tips-hover);
 	}
 
-	// Створюємо свою власну красиву стрілочку
 	&::after {
-		content: '▼';
-		font-size: 0.8rem;
-		color: $text-muted;
-		transition: transform 0.3s ease; // Плавна анімація повороту
+		content: '';
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 7px solid var(--tips-muted);
+		transition: transform var(--tips-transition);
 	}
 }
 
-/* Текст всередині акордеона */
 .accordion-body {
 	padding: 16px 20px;
-	color: $text-muted;
+	color: var(--tips-muted);
 	font-size: 0.95rem;
 	line-height: 1.6;
-	background-color: $card-bg;
+	background-color: var(--tips-surface);
 
 	p {
 		margin-bottom: 10px;
@@ -177,11 +200,17 @@ $hover-bg: #f1f5f9; // Колір при наведенні мишки
 	}
 
 	strong {
-		color: $text-main;
+		color: var(--tips-text);
 	}
 
 	ul {
 		margin-left: 20px;
 		margin-top: 10px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:host {
+		--tips-transition: 0ms;
 	}
 }
