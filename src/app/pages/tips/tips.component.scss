@@ -21,6 +21,7 @@
 	--tips-shadow-hover: var(--shadow-md);
 	--tips-transition: var(--motion-fast) var(--easing);
 	--tips-focus-ring: var(--focus-ring);
+	--tips-chip-active-text: #111827;
 
 	display: block;
 }
@@ -99,7 +100,7 @@
 
 		&.active {
 			background-color: var(--tips-primary);
-			color: #ffffff;
+			color: var(--tips-chip-active-text);
 			border-color: var(--tips-primary);
 		}
 	}
