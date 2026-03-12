@@ -12,10 +12,10 @@
 	/* surfaces */
 	--c-bg-primary: #F3F4F7;
 	--c-bg-secondary: #FFFFFF;
-	--c-bg-tertiary: #ACABA9;
+	--c-bg-tertiary: #E9ECEF;
 
 	/* content */
-	--c-text-primary: #20201F;
+	--c-text-primary: #343A40;
 	--c-text-secondary: #000000;
 	--c-text-muted: #666562;
 	--c-placeholder: #666562ab;
@@ -61,7 +61,7 @@
 	--motion-slow: 0.4s;
 
 	/* focus */
-	--focus-ring: 0 0 0 3px rgba(37, 110, 255, 0.35);
+	--focus-ring: 0 0 0 3px rgba(231, 217, 50, 0.3);
 
 	--radius: 0px;
 	--radius-card: 0px;
@@ -77,8 +77,8 @@ html[data-mode='dark'] {
 
 	/* borders & elevation */
 	--c-border: #404040;
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-	--shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+	--shadow-sm: 0 1px 2px rgba(149, 157, 165, 0.1);
+	--shadow-md: 0 10px 30px rgba(149, 157, 165, 0.1);
 
 	/* content */
 	--c-text-primary: #e8e8e8;
