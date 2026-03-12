@@ -8,21 +8,11 @@
 			</p>
 		</div>
 	</section>
-
 	<section class="pages">
 		<div class="container">
 			<h2 class="section-title">Page descriptions</h2>
 			<div class="grid">
-				<div
-					class="page-card"
-					*ngFor="let page of pages; let i = index; trackBy: trackByIndex"
-					[class.is-flipped]="isFlipped(i)"
-					role="button"
-					tabindex="0"
-					(click)="toggleFlip(i)"
-					(keydown.enter)="toggleFlip(i)"
-					(keydown.space)="toggleFlip(i)"
-				>
+				<div class="page-card" *ngFor="let page of pages; let i = index; trackBy: trackByIndex" [class.is-flipped]="isFlipped(i)" role="button" tabindex="0" (click)="toggleFlip(i)" (keydown.enter)="toggleFlip(i)" (keydown.space)="toggleFlip(i)">
 					<div class="card-inner">
 						<div class="card-face card-front">
 							<h3>{{ page.title }}</h3>

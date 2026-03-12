@@ -71,8 +71,8 @@ h1 {
 	-webkit-transform-style: preserve-3d;
 	transform: translateY(var(--card-lift, 0));
 	transition: transform var(--motion-slow) var(--easing),
-		box-shadow var(--motion) var(--easing),
-		border-color var(--motion) var(--easing);
+	box-shadow var(--motion) var(--easing),
+	border-color var(--motion) var(--easing);
 	cursor: pointer;
 	overflow: hidden;
 	will-change: transform;
