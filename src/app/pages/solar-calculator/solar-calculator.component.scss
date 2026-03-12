@@ -4,13 +4,11 @@
   font-family: var(--ff-base);
   font-size: var(--fs);
   letter-spacing: var(--letter-spacing);
-  background: var(--c-bg-secondary);
   color: var(--c-text-primary);
 }
 
 /* Header */
 .page__header {
-  background: var(--c-bg-primary);
   color: var(--c-text-primary);
   padding: var(--sp-4) 0;
   border-bottom: 1px solid var(--c-border);
@@ -37,7 +35,6 @@
 
 /* Cards */
 .card {
-  background: var(--c-bg-primary);
   border-radius: var(--radius-card);
   padding: var(--sp-4);
   flex: 1;
