@@ -198,6 +198,89 @@
   outline: none;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .page__title {
+    font-size: 18px;
+  }
+
+  .card__title {
+    font-size: 18px;
+  }
+
+  .fieldRow {
+    flex-direction: column;
+  }
+
+  .field--half {
+    flex: 1 1 100%;
+  }
+
+  .control {
+    width: 100%;
+  }
+
+  .chips {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .chip {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .big {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__header {
+    padding: var(--sp-2) 0;
+  }
+
+  .card {
+    padding: var(--sp-2);
+  }
+
+  .acc__head {
+    padding: var(--sp-2);
+    font-size: 14px;
+  }
+
+  .acc__body {
+    padding: var(--sp-2);
+  }
+
+  .field {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-1);
+  }
+
+  .field__label {
+    font-size: 12px;
+  }
+
+  .control {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
 .btn:focus-visible {
   box-shadow: var(--focus-ring);
 }
@@ -210,6 +293,16 @@
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .card {
+    width: 100%;
   }
 
   .field {
@@ -239,6 +332,7 @@
   .resultRow {
     flex-direction: row;
     align-items: flex-start;
+    width: 100%;
   }
 
   .btn {
