@@ -4,10 +4,10 @@
 /* Design tokens (CSS variables). Runtime-themable; keep SCSS using var(--token) */
 :root {
 	/* brand / actions */
-	--c-primary: #256eff;
-	--c-primary-hover: #0051f1;
-	--c-secondary: #c53d3d;
-	--c-secondary-hover: #962a2a;
+	--c-primary: #E7D932;
+	--c-primary-hover: #D1C42D;
+	--c-secondary: #666562;
+	--c-secondary-hover: #20201F;
 
 	/* surfaces */
 	--c-bg-primary: #f3f4f7;
