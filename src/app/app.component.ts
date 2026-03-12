@@ -4,6 +4,7 @@ import { filter } from 'rxjs';
 import { ThemeService } from './services/theme.service';
 
 type AppNavItem = {
+	title: string;
 	path: string;
 	label: string;
 	icon: string; // material icon name
@@ -24,21 +25,41 @@ export class AppComponent {
 	protected readonly sidebarOpen = signal(false);
 
 	protected readonly footerItems: AppNavItem[] = [
-		{ path: '/solar-calculator', label: 'Solar', icon: 'solar_power' },
-		{ path: '/unit-converter', label: 'Convert', icon: 'swap_horiz' },
-		{ path: '/device-power-calculator', label: 'Devices', icon: 'devices' },
-		{ path: '/ev-charging-calculator', label: 'Charge', icon: 'ev_station' },
+		{
+			path: '/solar-calculator',
+			title: 'Solar Calculator',
+			label: 'Solar',
+			icon: 'solar_power',
+		},
+		{ path: '/unit-converter', title: 'Unit Converter', label: 'Convert', icon: 'swap_horiz' },
+		{
+			path: '/device-power-calculator',
+			title: 'Device Power Calculator',
+			label: 'Devices',
+			icon: 'devices',
+		},
+		{
+			path: '/ev-charging-calculator',
+			title: 'EV Charging Calculator',
+			label: 'Charge',
+			icon: 'ev_station',
+		},
 	];
 
 	protected readonly sidebarItems: AppNavItem[] = [
-		{ path: '/', label: 'Home', icon: 'home' },
-		{ path: '/settings', label: 'Settings', icon: 'settings' },
-		{ path: '/about', label: 'About', icon: 'info' },
-		{ path: '/battery-usage', label: 'Battery usage', icon: 'battery_full' },
-		{ path: '/tips', label: 'Tips', icon: 'lightbulb' },
-		{ path: '/faq', label: 'Faq', icon: 'help' },
-		{ path: '/glossary', label: 'Glossary', icon: 'menu_book' },
-		{ path: '/legal', label: 'Legal', icon: 'gavel' },
+		{ path: '/', title: 'Home', label: 'Home', icon: 'home' },
+		{ path: '/settings', title: 'Settings', label: 'Settings', icon: 'info' },
+		{ path: '/about', title: 'About', label: 'About', icon: 'info' },
+		{
+			path: '/battery-usage',
+			title: 'Battery Usage',
+			label: 'Battery usage',
+			icon: 'battery_full',
+		},
+		{ path: '/tips', title: 'Tips', label: 'Tips', icon: 'lightbulb' },
+		{ path: '/faq', title: 'FAQ', label: 'Faq', icon: 'help' },
+		{ path: '/glossary', title: 'Glossary', label: 'Glossary', icon: 'menu_book' },
+		{ path: '/legal', title: 'Legal', label: 'Legal', icon: 'gavel' },
 	];
 
 	protected readonly logoText = 'voltlab';
@@ -49,10 +70,10 @@ export class AppComponent {
 		const path = this.currentPath();
 
 		const byFooter = this.footerItems.find((i) => this._isActive(path, i.path));
-		if (byFooter) return byFooter.label;
+		if (byFooter) return byFooter.title;
 
 		const bySidebar = this.sidebarItems.find((i) => this._isActive(path, i.path));
-		if (bySidebar) return bySidebar.label;
+		if (bySidebar) return bySidebar.title;
 
 		return 'voltlab';
 	});
