@@ -213,7 +213,7 @@
   }
 
   .field {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
   }
 
@@ -225,12 +225,19 @@
     width: 100%;
   }
 
+  .chip {
+    flex: 1;
+    justify-content: center;
+  }
+
   .chips {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-2);
   }
 
   .resultRow {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
   }
 
