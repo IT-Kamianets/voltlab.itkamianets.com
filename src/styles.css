@@ -10,18 +10,18 @@
 	--c-secondary-hover: #20201F;
 
 	/* surfaces */
-	--c-bg-primary: #f3f4f7;
-	--c-bg-secondary: #ffffff;
-	--c-bg-tertiary: #fcfdfe;
+	--c-bg-primary: #F3F4F7;
+	--c-bg-secondary: #FFFFFF;
+	--c-bg-tertiary: #ACABA9;
 
 	/* content */
-	--c-text-primary: #5f6066;
-	--c-text-secondary: #17224f;
-	--c-text-muted: #8b8d94;
-	--c-placeholder: #313335ab;
+	--c-text-primary: #20201F;
+	--c-text-secondary: #000000;
+	--c-text-muted: #666562;
+	--c-placeholder: #666562ab;
 
 	/* borders & elevation */
-	--c-border: #eceef5;
+	--c-border: #ACABA9;
 	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
 	--shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
 
