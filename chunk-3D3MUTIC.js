@@ -1,0 +1,1 @@
+import{Ea as a,Ya as n,Za as o,kb as c}from"./chunk-BMIMTNJC.js";var r=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-ev-charging-calculator"]],decls:2,vars:0,template:function(e,l){e&1&&(n(0,"p"),c(1,"ev-charging-calculator works!"),o())},encapsulation:2,changeDetection:0})};export{r as EvChargingCalculatorComponent};
