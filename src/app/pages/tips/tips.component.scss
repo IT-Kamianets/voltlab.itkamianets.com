@@ -9,7 +9,9 @@
 	--tips-text: var(--c-text-secondary);
 	--tips-muted: var(--c-text-muted);
 
-	--tips-font-family: var(--ff-base);
+	--tips-font-family: var(--ff-base, system-ui, sans-serif);
+	--tips-font-size: var(--fs, 16px);
+	--tips-letter-spacing: var(--letter-spacing, 0px);
 
 	--tips-max-width: min(800px, var(--container));
 	--tips-page-padding: var(--sp-6);
@@ -31,6 +33,8 @@
 	margin: 0 auto;
 	padding: var(--tips-page-padding);
 	font-family: var(--tips-font-family);
+	font-size: var(--tips-font-size);
+	letter-spacing: var(--tips-letter-spacing);
 	color: var(--tips-text);
 	background-color: var(--tips-bg);
 	min-height: 100vh;
@@ -65,10 +69,16 @@
 		border: 2px solid var(--tips-border);
 		border-radius: var(--tips-radius-pill);
 		font-size: 1rem;
+		font-family: inherit;
+		letter-spacing: inherit;
 		outline: none;
 		background-color: var(--tips-surface);
 		color: var(--tips-text);
 		transition: border-color var(--tips-transition), box-shadow var(--tips-transition);
+
+		&::placeholder {
+			color: var(--c-placeholder);
+		}
 
 		&:focus {
 			border-color: var(--tips-primary);
@@ -90,6 +100,8 @@
 		border-radius: var(--tips-radius-pill);
 		color: var(--tips-text);
 		font-size: 0.9rem;
+		font-family: inherit;
+		letter-spacing: inherit;
 		cursor: pointer;
 		transition: background-color var(--tips-transition), border-color var(--tips-transition),
 			color var(--tips-transition);
@@ -158,6 +170,8 @@
 	padding: 16px 20px;
 	font-weight: 500;
 	font-size: 1rem;
+	font-family: inherit;
+	letter-spacing: inherit;
 	cursor: pointer;
 	position: relative;
 	list-style: none;
