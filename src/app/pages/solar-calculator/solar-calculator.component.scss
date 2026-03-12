@@ -42,7 +42,6 @@
   flex-direction: column;
   gap: var(--sp-4);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--c-border);
 }
 
 .card__title {
@@ -63,7 +62,7 @@
 }
 
 .acc {
-  border: 1px solid var(--c-border);
+
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--c-bg-primary);
@@ -87,7 +86,7 @@
 .field {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--sp-3);
 }
 
@@ -113,8 +112,8 @@
   background: var(--c-bg-primary);
   color: var(--c-text-primary);
   width: 180px;
-  transition: box-shadow var(--motion-fast) var(--easing),
-    border-color var(--motion-fast) var(--easing);
+  transition: box-shadow var(--motion-fast) var(--easing);
+  border-color: var(--motion-fast) var(--easing);
 }
 
 .control--full {
