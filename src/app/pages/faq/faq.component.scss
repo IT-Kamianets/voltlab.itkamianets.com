@@ -1,0 +1,104 @@
+// Повертаємо палітру VoltLab з першого коду
+$primary-color: #f39c12; // Яскравий помаранчевий
+$bg-color: #0f172a;      // Темно-синій фон (Space Blue)
+$text-light: #f8fafc;    // Майже білий для читабельності
+$card-bg: #1e293b;       // Світліший синій для карток
+$text-gray: #cbd5e1;     // Сірий для відповідей
+$transition: all 0.3s ease;
+
+.faq-section {
+    background-color: $bg-color;
+    padding: 60px 20px;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: $text-light;
+    margin-bottom: 40px;
+    
+    span {
+        color: $primary-color;
+    }
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    background: $card-bg;
+    border-radius: 12px;
+    border: 1px solid rgba($primary-color, 0.1);
+    transition: $transition;
+    overflow: hidden;
+
+    &[open] {
+        border-color: rgba($primary-color, 0.4);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        
+        summary::after {
+            transform: rotate(180deg);
+        }
+    }
+
+    summary {
+        list-style: none;
+        padding: 22px 25px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: $text-light; // Тепер текст буде чітким
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        outline: none;
+        user-select: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &::after {
+            content: "▼";
+            font-size: 0.9rem;
+            color: $primary-color;
+            transition: $transition;
+        }
+
+        &:hover {
+            background: rgba($primary-color, 0.05);
+        }
+    }
+}
+
+.faq-answer {
+    padding: 0 25px 22px 25px;
+    color: $text-gray;
+    line-height: 1.7;
+    font-size: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    animation: slideDown 0.4s ease-out;
+
+    p {
+        margin: 0;
+    }
+
+    strong {
+        color: $primary-color;
+    }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
