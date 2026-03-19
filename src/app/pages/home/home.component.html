@@ -1,4 +1,29 @@
-<main class="container main">
-    <h1>Welcome to VoltLab</h1>
-    <p>Innovation & technology community</p>
+<main class="home">
+	<section class="hero">
+		<div class="container">
+			<h1>Home page with all sections</h1>
+			<p class="lead">
+				Here you will find short descriptions of each page to quickly select the tool, guide or setting you need.
+                To view the description of the card you need, simply click on it.
+			</p>
+		</div>
+	</section>
+	<section class="pages">
+		<div class="container">
+			<h2 class="section-title">Page descriptions</h2>
+			<div class="grid">
+				<div class="page-card" *ngFor="let page of pages; let i = index; trackBy: trackByIndex" [class.is-flipped]="isFlipped(i)" role="button" tabindex="0" (click)="toggleFlip(i)" (keydown.enter)="toggleFlip(i)" (keydown.space)="toggleFlip(i)">
+					<div class="card-inner">
+						<div class="card-face card-front">
+							<h3>{{ page.title }}</h3>
+							<p>Tap to view details.</p>
+						</div>
+						<div class="card-face card-back">
+							<p>{{ page.description }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </main>
