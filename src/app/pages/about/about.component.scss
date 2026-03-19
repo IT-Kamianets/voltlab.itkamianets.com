@@ -1,20 +1,13 @@
-// Variables
-$primary: #00d084;
-$dark: #0f172a;
-$light: #f8fafc;
-$gray: #64748b;
-$border: #e2e8f0;
-
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Inter', sans-serif;
+	font-family: var(--ff-base);
 }
 
 body {
-	background: $light;
-	color: $dark;
+	background: var(--c-bg-primary);
+	color: var(--c-text-primary);
 	line-height: 1.6;
 }
 
@@ -26,8 +19,8 @@ body {
 
 // Header
 .header {
-	background: white;
-	border-bottom: 1px solid $border;
+	background: var(--c-bg-secondary);
+	border-bottom: 1px solid var(--c-border);
 	padding: 1rem 0;
 
 	.container {
@@ -44,12 +37,12 @@ body {
 	.nav a {
 		margin-left: 1.5rem;
 		text-decoration: none;
-		color: $gray;
+		color: var(--c-text-muted);
 		font-weight: 500;
 
 		&.active,
 		&:hover {
-			color: $primary;
+			color: var(--c-primary);
 		}
 	}
 }
@@ -62,12 +55,13 @@ body {
 	h1 {
 		font-size: 2.5rem;
 		margin-bottom: 1rem;
+		color: var(--c-text-secondary);
 	}
 
 	p {
 		max-width: 700px;
 		margin: 0 auto;
-		color: $gray;
+		color: var(--c-text-muted);
 	}
 }
 
@@ -78,6 +72,7 @@ body {
 	h2 {
 		text-align: center;
 		margin-bottom: 2rem;
+		color: var(--c-text-secondary);
 	}
 
 	.service-grid {
@@ -87,23 +82,24 @@ body {
 	}
 
 	.service-card {
-		background: white;
+		background: var(--c-bg-secondary);
 		padding: 1.5rem;
-		border: 1px solid $border;
-		border-radius: 12px;
+		border: 1px solid var(--c-border);
+		border-radius: var(--radius-card);
 		transition: 0.2s ease;
 
 		h3 {
 			margin-bottom: 0.5rem;
+			color: var(--c-text-secondary);
 		}
 
 		p {
-			color: $gray;
+			color: var(--c-text-muted);
 			font-size: 0.95rem;
 		}
 
 		&:hover {
-			border-color: $primary;
+			border-color: var(--c-primary);
 			transform: translateY(-4px);
 		}
 	}
@@ -112,11 +108,12 @@ body {
 // Feedback
 .feedback {
 	padding: 3rem 0;
-	background: white;
+	background: var(--c-bg-secondary);
 
 	h2 {
 		text-align: center;
 		margin-bottom: 2rem;
+		color: var(--c-text-secondary);
 	}
 
 	.feedback-form {
@@ -130,35 +127,43 @@ body {
 				display: block;
 				margin-bottom: 0.4rem;
 				font-weight: 500;
+				color: var(--c-text-primary);
 			}
 
 			input,
 			textarea {
 				width: 100%;
 				padding: 0.8rem;
-				border: 1px solid $border;
-				border-radius: 8px;
+				border: 1px solid var(--c-border);
+				border-radius: var(--radius);
 				font-size: 1rem;
+				background: var(--c-bg-tertiary);
+				color: var(--c-text-primary);
+
+				&::placeholder {
+					color: var(--c-placeholder);
+				}
 
 				&:focus {
 					outline: none;
-					border-color: $primary;
+					border-color: var(--c-primary);
+					box-shadow: var(--focus-ring);
 				}
 			}
 		}
 
 		.btn-primary {
-			background: $primary;
-			color: white;
+			background: var(--c-primary);
+			color: var(--c-secondary-hover);
 			border: none;
 			padding: 0.9rem 1.5rem;
-			border-radius: 8px;
+			border-radius: var(--radius-btn);
 			cursor: pointer;
 			font-weight: 600;
-			transition: 0.2s ease;
+			transition: background var(--motion-fast) var(--easing);
 
 			&:hover {
-				background: darken($primary, 8%);
+				background: var(--c-primary-hover);
 			}
 		}
 	}
@@ -169,5 +174,5 @@ body {
 	padding: 1.5rem 0;
 	text-align: center;
 	font-size: 0.9rem;
-	color: $gray;
+	color: var(--c-text-muted);
 }
