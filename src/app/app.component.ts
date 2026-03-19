@@ -8,6 +8,7 @@ type AppNavItem = {
 	path: string;
 	label: string;
 	icon: string; // material icon name
+	svgIcon?: { light: string; dark: string };
 };
 
 @Component({
@@ -48,17 +49,48 @@ export class AppComponent {
 
 	protected readonly sidebarItems: AppNavItem[] = [
 		{ path: '/', title: 'Home', label: 'Home', icon: 'home' },
-		{ path: '/settings', title: 'Settings', label: 'Settings', icon: 'info' },
-		{ path: '/about', title: 'About', label: 'About', icon: 'info' },
 		{
 			path: '/battery-usage',
 			title: 'Battery Usage',
 			label: 'Battery usage',
 			icon: 'battery_full',
+			svgIcon: { light: '/battery-usage-light.svg', dark: '/battery-usage-dark.svg' },
 		},
-		{ path: '/tips', title: 'Tips', label: 'Tips', icon: 'lightbulb' },
-		{ path: '/faq', title: 'FAQ', label: 'Faq', icon: 'help' },
-		{ path: '/glossary', title: 'Glossary', label: 'Glossary', icon: 'menu_book' },
+		{
+			path: '/tips',
+			title: 'Tips',
+			label: 'Tips',
+			icon: 'lightbulb',
+			svgIcon: { light: '/tips-light.svg', dark: '/tips-dark.svg' },
+		},
+		{
+			path: '/faq',
+			title: 'FAQ',
+			label: 'Faq',
+			icon: 'help',
+			svgIcon: { light: '/faq-light.svg', dark: '/faq-dark.svg' },
+		},
+		{
+			path: '/glossary',
+			title: 'Glossary',
+			label: 'Glossary',
+			icon: 'menu_book',
+			svgIcon: { light: '/glossary-light.svg', dark: '/glossary-dark.svg' },
+		},
+		{
+			path: '/settings',
+			title: 'Settings',
+			label: 'Settings',
+			icon: 'info',
+			svgIcon: { light: '/settings-light.svg', dark: '/settings-dark.svg' },
+		},
+		{
+			path: '/about',
+			title: 'About',
+			label: 'About',
+			icon: 'info',
+			svgIcon: { light: '/about-light.svg', dark: '/about-dark.svg' },
+		},
 		{ path: '/legal', title: 'Legal', label: 'Legal', icon: 'gavel' },
 	];
 

@@ -1,2 +1,84 @@
-<p>settings works!</p>
-ввв
+<div class="settings">
+	<div class="settings__header">
+		<h2 class="settings__title">{{ t('title') }}</h2>
+		<p class="settings__subtitle">{{ t('subtitle') }}</p>
+	</div>
+
+	<div class="settings__card">
+		<div class="settings__row">
+			<div class="settings__meta">
+				<label class="settings__label" for="units">{{ t('unitsLabel') }}</label>
+				<div class="settings__hint">{{ t('unitsHint') }}</div>
+			</div>
+			<div class="settings__control">
+				<select
+					id="units"
+					[ngModel]="unitsSig()"
+					(ngModelChange)="onUnitsChange($event)"
+				>
+					@for (opt of unitOptions; track opt.value) {
+						<option [ngValue]="opt.value">
+							{{ opt.label[languageSig()] }} ({{ opt.hint[languageSig()] }})
+						</option>
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="settings__row">
+			<div class="settings__meta">
+				<label class="settings__label" for="currency">{{ t('currencyLabel') }}</label>
+				<div class="settings__hint">{{ t('currencyHint') }}</div>
+			</div>
+			<div class="settings__control">
+				<select
+					id="currency"
+					[ngModel]="currencySig()"
+					(ngModelChange)="onCurrencyChange($event)"
+				>
+					@for (opt of currencyOptions; track opt.value) {
+						<option [ngValue]="opt.value">{{ opt.label[languageSig()] }}</option>
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="settings__row">
+			<div class="settings__meta">
+				<label class="settings__label" for="language">{{ t('languageLabel') }}</label>
+				<div class="settings__hint">{{ t('languageHint') }}</div>
+			</div>
+			<div class="settings__control">
+				<select
+					id="language"
+					[ngModel]="languageSig()"
+					(ngModelChange)="onLanguageChange($event)"
+				>
+					@for (opt of languageOptions; track opt.value) {
+						<option [ngValue]="opt.value">{{ opt.label[languageSig()] }}</option>
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="settings__row">
+			<div class="settings__meta">
+				<label class="settings__label" for="theme">{{ t('themeLabel') }}</label>
+				<div class="settings__hint">{{ t('themeHint') }}</div>
+			</div>
+			<div class="settings__control">
+				<select id="theme" [ngModel]="themeSig()" (ngModelChange)="onThemeChange($event)">
+					@for (opt of themeOptions; track opt.value) {
+						<option [ngValue]="opt.value">{{ opt.label[languageSig()] }}</option>
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="settings__actions">
+			<button type="button" class="settings__btn" (click)="onReset()">
+				{{ t('reset') }}
+			</button>
+		</div>
+	</div>
+</div>

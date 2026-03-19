@@ -29,6 +29,13 @@
 		color: var(--c-text-secondary);
 	}
 
+	&__logo-img {
+		height: 18px;
+		width: auto;
+		max-width: min(165px, 34vw);
+		display: block;
+	}
+
 	&__logo-text {
 		font-weight: 700;
 		font-size: 18px;
@@ -202,6 +209,12 @@
 	&__sideicon {
 		font-size: 20px;
 		line-height: 1;
+	}
+
+	&__sideicon-img {
+		width: 20px;
+		height: 20px;
+		display: block;
 	}
 
 	&__sidelabel {

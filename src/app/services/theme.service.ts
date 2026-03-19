@@ -1,7 +1,7 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
 
-type AppTheme = 'dark' | 'light';
+export type AppTheme = 'dark' | 'light';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -18,6 +18,10 @@ export class ThemeService {
 	constructor() {
 		const saved = this._read();
 		this._set(saved ?? 'dark');
+	}
+
+	setTheme(theme: AppTheme): void {
+		this._set(theme);
 	}
 
 	toggle(): void {

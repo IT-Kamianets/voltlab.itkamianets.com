@@ -1,8 +1,17 @@
 @if (ready()) {
 	<div class="app">
 		<header class="app__topbar">
-			<a class="app__logo" routerLink="/" (click)="closeSidebar()">
-				<span class="app__logo-text">{{ logoText }}</span>
+			<a class="app__logo" routerLink="/" (click)="closeSidebar()" [attr.aria-label]="logoText">
+				<img
+					class="app__logo-img"
+					[src]="
+						theme.theme() === 'dark'
+							? '/voltlab-logo-dark.svg'
+							: '/voltlab-logo-light.svg'
+					"
+					[attr.alt]="logoText"
+					decoding="async"
+				/>
 			</a>
 
 			<div class="app__title">{{ pageTitle() }}</div>
@@ -61,7 +70,17 @@
 							[routerLink]="item.path"
 							class="app__sideitem"
 						>
-							<span class="material-icons app__sideicon">{{ item.icon }}</span>
+							@if (item.svgIcon) {
+									<img
+										class="app__sideicon-img"
+										[src]="theme.theme() === 'dark' ? item.svgIcon.dark : item.svgIcon.light"
+										alt=""
+										aria-hidden="true"
+										decoding="async"
+									/>
+							} @else {
+								<span class="material-icons app__sideicon">{{ item.icon }}</span>
+							}
 							<span class="app__sidelabel">{{ item.label }}</span>
 						</a>
 					}
