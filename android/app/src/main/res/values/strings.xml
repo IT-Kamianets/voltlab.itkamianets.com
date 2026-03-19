@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Voltlab</string>
+    <string name="title_activity_main">Voltlab</string>
+    <string name="package_name">voltlab.itkamianets.com</string>
+    <string name="custom_url_scheme">voltlab.itkamianets.com</string>
+</resources>
