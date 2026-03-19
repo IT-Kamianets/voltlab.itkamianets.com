@@ -1,16 +1,8 @@
-// Повертаємо палітру VoltLab з першого коду
-$primary-color: #f39c12; // Яскравий помаранчевий
-$bg-color: #0f172a;      // Темно-синій фон (Space Blue)
-$text-light: #f8fafc;    // Майже білий для читабельності
-$card-bg: #1e293b;       // Світліший синій для карток
-$text-gray: #cbd5e1;     // Сірий для відповідей
-$transition: all 0.3s ease;
-
 .faq-section {
-    background-color: $bg-color;
+    background-color: var(--c-bg-primary);
     padding: 60px 20px;
     min-height: 100vh;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans);
 }
 
 .container {
@@ -21,11 +13,11 @@ $transition: all 0.3s ease;
 .faq-title {
     text-align: center;
     font-size: 2.5rem;
-    color: $text-light;
+    color: var(--c-text-secondary);
     margin-bottom: 40px;
     
     span {
-        color: $primary-color;
+        color: var(--c-primary);
     }
 }
 
@@ -36,15 +28,16 @@ $transition: all 0.3s ease;
 }
 
 .faq-item {
-    background: $card-bg;
-    border-radius: 12px;
-    border: 1px solid rgba($primary-color, 0.1);
-    transition: $transition;
+    background: var(--c-bg-secondary);
+    border-radius: var(--radius-card);
+    border: 1px solid color-mix(in srgb, var(--c-primary) 10%, transparent);
+    transition: all var(--motion) var(--easing);
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
 
     &[open] {
-        border-color: rgba($primary-color, 0.4);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border-color: color-mix(in srgb, var(--c-primary) 40%, transparent);
+        box-shadow: var(--shadow-md);
         
         summary::after {
             transform: rotate(180deg);
@@ -56,7 +49,7 @@ $transition: all 0.3s ease;
         padding: 22px 25px;
         font-weight: 600;
         font-size: 1.1rem;
-        color: $text-light; // Тепер текст буде чітким
+        color: var(--c-text-secondary);
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -69,24 +62,24 @@ $transition: all 0.3s ease;
         }
 
         &::after {
-            content: "▼";
+            content: "\25BE";
             font-size: 0.9rem;
-            color: $primary-color;
-            transition: $transition;
+            color: var(--c-primary);
+            transition: all var(--motion) var(--easing);
         }
 
         &:hover {
-            background: rgba($primary-color, 0.05);
+            background: color-mix(in srgb, var(--c-primary) 5%, transparent);
         }
     }
 }
 
 .faq-answer {
     padding: 0 25px 22px 25px;
-    color: $text-gray;
+    color: var(--c-text-muted);
     line-height: 1.7;
     font-size: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid color-mix(in srgb, var(--c-border) 35%, transparent);
     animation: slideDown 0.4s ease-out;
 
     p {
@@ -94,7 +87,7 @@ $transition: all 0.3s ease;
     }
 
     strong {
-        color: $primary-color;
+        color: var(--c-primary);
     }
 }
 
