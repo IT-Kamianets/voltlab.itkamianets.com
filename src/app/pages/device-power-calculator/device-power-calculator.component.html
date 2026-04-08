@@ -1,0 +1,46 @@
+<div class="page-grid">
+
+  <!-- LEFT -->
+  <div class="card">
+    <div class="card-header">
+      ⚡ Device Configuration
+    </div>
+
+    <div class="card-body">
+
+      <div class="form-row">
+        <label>Device</label>
+        <select [(ngModel)]="selectedDeviceIndex">
+          <option *ngFor="let device of devicePresets; let i = index" [value]="i">
+            {{device.name}} ({{device.power}} W)
+          </option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>Custom power (W)</label>
+        <input type="number" [(ngModel)]="customPower">
+      </div>
+
+      <div class="form-row">
+        <label>Usage hours</label>
+        <input type="number" [(ngModel)]="hours">
+      </div>
+
+      <button (click)="addDevice()">Add Device</button>
+
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="card">
+    <div class="card-header">
+      📊 Results
+    </div>
+
+    <div class="card-body">
+      <!-- тут будуть результати -->
+    </div>
+  </div>
+
+</div>

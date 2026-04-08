@@ -1,0 +1,58 @@
+<head>
+	<title>База знань - Автономне живлення</title>
+	<meta
+		name="description"
+		content="Довідник з автономного живлення та розрахунків. Ват, Ват-година, закон Ома, батареї, станції, побутова техніка та сонячна енергія."
+	/>
+</head>
+<body>
+	<div class="tips-page-container">
+		<section class="hero-section">
+			<h1 class="page-title">База знань</h1>
+			<p class="page-subtitle">Довідник з автономного живлення та розрахунків</p>
+
+			<div class="search-container">
+				<input
+					type="text"
+					class="search-bar"
+					[(ngModel)]="searchQuery"
+					placeholder="Шукати (наприклад, Ампер)..."
+					aria-label="Пошук по базі знань"
+				/>
+			</div>
+
+			<div class="filter-chips">
+				@for (category of categories; track category) {
+					<button
+						class="chip"
+						[class.active]="activeCategory === category"
+						(click)="setCategory(category)"
+					>
+						{{ category }}
+					</button>
+				}
+			</div>
+		</section>
+
+		<main class="tips-content">
+			@if (groupedFilteredTips.length === 0) {
+				<div class="empty-state">
+					<p>За вашим запитом нічого не знайдено 😔</p>
+				</div>
+			}
+
+			@for (group of groupedFilteredTips; track group.category) {
+				<div class="tips-category">
+					<h2 class="category-title">{{ group.category }}</h2>
+
+					@for (tip of group.items; track tip.title) {
+						<details class="accordion-panel">
+							<summary class="accordion-header">{{ tip.title }}</summary>
+							<div class="accordion-body" [innerHTML]="tip.content"></div>
+						</details>
+					}
+				</div>
+			}
+		</main>
+	</div>
+</body>

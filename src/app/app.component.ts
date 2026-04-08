@@ -1,0 +1,145 @@
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { ThemeService } from './services/theme.service';
+
+type AppNavItem = {
+	title: string;
+	path: string;
+	label: string;
+	icon: string; // material icon name
+	svgIcon?: { light: string; dark: string };
+};
+
+@Component({
+	selector: 'app-root',
+	imports: [RouterOutlet, RouterLink, RouterLinkActive],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AppComponent {
+	private readonly _router = inject(Router);
+
+	protected readonly theme = inject(ThemeService);
+
+	protected readonly sidebarOpen = signal(false);
+
+	protected readonly footerItems: AppNavItem[] = [
+		{
+			path: '/solar-calculator',
+			title: 'Solar Calculator',
+			label: 'Solar',
+			icon: 'solar_power',
+		},
+		{ path: '/unit-converter', title: 'Unit Converter', label: 'Convert', icon: 'swap_horiz' },
+		{
+			path: '/device-power-calculator',
+			title: 'Device Power Calculator',
+			label: 'Devices',
+			icon: 'devices',
+		},
+		{
+			path: '/ev-charging-calculator',
+			title: 'EV Charging Calculator',
+			label: 'Charge',
+			icon: 'ev_station',
+		},
+	];
+
+	protected readonly sidebarItems: AppNavItem[] = [
+		{ path: '/', title: 'Home', label: 'Home', icon: 'home' },
+		{
+			path: '/battery-usage',
+			title: 'Battery Usage',
+			label: 'Battery usage',
+			icon: 'battery_full',
+			svgIcon: { light: '/battery-usage-light.svg', dark: '/battery-usage-dark.svg' },
+		},
+		{
+			path: '/tips',
+			title: 'Tips',
+			label: 'Tips',
+			icon: 'lightbulb',
+			svgIcon: { light: '/tips-light.svg', dark: '/tips-dark.svg' },
+		},
+		{
+			path: '/faq',
+			title: 'FAQ',
+			label: 'Faq',
+			icon: 'help',
+			svgIcon: { light: '/faq-light.svg', dark: '/faq-dark.svg' },
+		},
+		{
+			path: '/glossary',
+			title: 'Glossary',
+			label: 'Glossary',
+			icon: 'menu_book',
+			svgIcon: { light: '/glossary-light.svg', dark: '/glossary-dark.svg' },
+		},
+		{
+			path: '/settings',
+			title: 'Settings',
+			label: 'Settings',
+			icon: 'info',
+			svgIcon: { light: '/settings-light.svg', dark: '/settings-dark.svg' },
+		},
+		{
+			path: '/about',
+			title: 'About',
+			label: 'About',
+			icon: 'info',
+			svgIcon: { light: '/about-light.svg', dark: '/about-dark.svg' },
+		},
+		{ path: '/legal', title: 'Legal', label: 'Legal', icon: 'gavel' },
+	];
+
+	protected readonly logoText = 'voltlab';
+
+	protected readonly currentPath = signal<string>(this._router.url || '/');
+
+	protected readonly pageTitle = computed(() => {
+		const path = this.currentPath();
+
+		const byFooter = this.footerItems.find((i) => this._isActive(path, i.path));
+		if (byFooter) return byFooter.title;
+
+		const bySidebar = this.sidebarItems.find((i) => this._isActive(path, i.path));
+		if (bySidebar) return bySidebar.title;
+
+		return 'voltlab';
+	});
+
+	ready = signal(false);
+
+	constructor() {
+		this._router.events
+			.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+			.subscribe((e) => {
+				this.currentPath.set(e.urlAfterRedirects || '/');
+				this.sidebarOpen.set(false);
+			});
+
+		setTimeout(() => {
+			this.ready.set(true);
+		}, 1000);
+	}
+
+	protected onThemeToggle(): void {
+		this.theme.toggle();
+	}
+
+	protected toggleSidebar(): void {
+		this.sidebarOpen.update((v) => !v);
+	}
+
+	protected closeSidebar(): void {
+		this.sidebarOpen.set(false);
+	}
+
+	private _isActive(current: string, target: string): boolean {
+		const cur = (current || '/').split('?')[0].split('#')[0];
+		if (target === '/') return cur === '/';
+		return cur === target || cur.startsWith(`${target}/`);
+	}
+}
