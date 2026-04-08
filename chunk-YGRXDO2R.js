@@ -1,0 +1,1 @@
+import{Fa as a,Za as n,_a as o,lb as s}from"./chunk-S2YB2KL5.js";var r=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-battery-usage"]],decls:2,vars:0,template:function(e,i){e&1&&(n(0,"p"),s(1,"battery-usage works!"),o())},encapsulation:2,changeDetection:0})};export{r as BatteryUsageComponent};
