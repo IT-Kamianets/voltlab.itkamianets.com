@@ -1,0 +1,231 @@
+﻿/* Tips page: uses global design tokens from src/styles.css (:root) */
+:host {
+	--tips-primary: var(--c-primary);
+	--tips-bg: var(--c-bg-primary);
+	--tips-surface: var(--c-bg-secondary);
+	--tips-hover: var(--c-bg-tertiary);
+	--tips-border: var(--c-border);
+
+	--tips-text: var(--c-text-secondary);
+	--tips-muted: var(--c-text-muted);
+
+	--tips-font-family: var(--ff-base, system-ui, sans-serif);
+	--tips-font-size: var(--fs, 16px);
+	--tips-letter-spacing: var(--letter-spacing, 0px);
+
+	--tips-max-width: min(800px, var(--container));
+	--tips-page-padding: var(--sp-6);
+
+	/* Keep rounding for Tips page (global tokens currently set to 0px). */
+	--tips-radius-md: 12px;
+	--tips-radius-pill: 999px;
+
+	--tips-shadow-hover: var(--shadow-md);
+	--tips-transition: var(--motion-fast) var(--easing);
+	--tips-focus-ring: var(--focus-ring);
+	--tips-chip-active-text: #111827;
+
+	display: block;
+}
+
+.tips-page-container {
+	max-width: var(--tips-max-width);
+	margin: 0 auto;
+	padding: var(--tips-page-padding);
+	font-family: var(--tips-font-family);
+	font-size: var(--tips-font-size);
+	letter-spacing: var(--tips-letter-spacing);
+	color: var(--tips-text);
+	background-color: var(--tips-bg);
+	min-height: 100vh;
+}
+
+/* --- 1. Hero Section (Шапка та пошук) --- */
+.hero-section {
+	text-align: center;
+	margin-bottom: 40px;
+
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 8px;
+		color: var(--tips-text);
+	}
+
+	.page-subtitle {
+		color: var(--tips-muted);
+		font-size: 1.1rem;
+		margin-bottom: 24px;
+	}
+}
+
+.search-container {
+	max-width: 500px;
+	margin: 0 auto 24px;
+
+	.search-bar {
+		width: 100%;
+		padding: 14px 20px;
+		border: 2px solid var(--tips-border);
+		border-radius: var(--tips-radius-pill);
+		font-size: 1rem;
+		font-family: inherit;
+		letter-spacing: inherit;
+		outline: none;
+		background-color: var(--tips-surface);
+		color: var(--tips-text);
+		transition: border-color var(--tips-transition), box-shadow var(--tips-transition);
+
+		&::placeholder {
+			color: var(--c-placeholder);
+		}
+
+		&:focus {
+			border-color: var(--tips-primary);
+			box-shadow: var(--tips-focus-ring);
+		}
+	}
+}
+
+.filter-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+
+	.chip {
+		padding: 8px 16px;
+		border: 1px solid var(--tips-border);
+		background-color: var(--tips-surface);
+		border-radius: var(--tips-radius-pill);
+		color: var(--tips-text);
+		font-size: 0.9rem;
+		font-family: inherit;
+		letter-spacing: inherit;
+		cursor: pointer;
+		transition: background-color var(--tips-transition), border-color var(--tips-transition),
+			color var(--tips-transition);
+
+		&:hover {
+			background-color: var(--tips-hover);
+		}
+
+		&.active {
+			background-color: var(--tips-primary);
+			color: var(--tips-chip-active-text);
+			border-color: var(--tips-primary);
+		}
+	}
+}
+
+/* --- 2. Контент та акордеони --- */
+.tips-content {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.empty-state {
+	text-align: center;
+	color: var(--tips-muted);
+	margin-top: 40px;
+}
+
+.tips-category {
+	.category-title {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-bottom: 16px;
+		color: var(--tips-text);
+		border-bottom: 2px solid var(--tips-border);
+		padding-bottom: 8px;
+	}
+}
+
+.accordion-panel {
+	background: var(--tips-surface);
+	border: 1px solid var(--tips-border);
+	border-radius: var(--tips-radius-md);
+	margin-bottom: 12px;
+	overflow: hidden;
+	transition: box-shadow var(--tips-transition), border-color var(--tips-transition);
+
+	&:hover {
+		box-shadow: var(--tips-shadow-hover);
+	}
+
+	&[open] {
+		.accordion-header {
+			border-bottom: 1px solid var(--tips-border);
+			color: var(--tips-primary);
+
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+	}
+}
+
+.accordion-header {
+	padding: 16px 20px;
+	font-weight: 500;
+	font-size: 1rem;
+	font-family: inherit;
+	letter-spacing: inherit;
+	cursor: pointer;
+	position: relative;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: background-color var(--tips-transition), color var(--tips-transition);
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&:hover {
+		background-color: var(--tips-hover);
+	}
+
+	&::after {
+		content: '';
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 7px solid var(--tips-muted);
+		transition: transform var(--tips-transition);
+	}
+}
+
+.accordion-body {
+	padding: 16px 20px;
+	color: var(--tips-muted);
+	font-size: 0.95rem;
+	line-height: 1.6;
+	background-color: var(--tips-surface);
+
+	p {
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	strong {
+		color: var(--tips-text);
+	}
+
+	ul {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:host {
+		--tips-transition: 0ms;
+	}
+}

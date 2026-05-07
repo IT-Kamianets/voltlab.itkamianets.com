@@ -1,0 +1,200 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 24px;
+  transition: 0.3s;
+}
+
+/* DARK THEME */
+
+:host-context(body.dark-theme) {
+  background: #1f1f1f;
+  color: #ffffff;
+}
+
+/* LIGHT THEME */
+
+:host-context(body.light-theme) {
+  background: #ececec;
+  color: #111111;
+}
+
+/* GRID */
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* CARD */
+
+.card {
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+:host-context(body.dark-theme) .card {
+  background: #2b2b2b;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+:host-context(body.light-theme) .card {
+  background: #f5f5f5;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+
+.card-header {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* FORM */
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* INPUTS */
+
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* DARK INPUTS */
+:host-context(html[data-mode='dark']) input,
+:host-context(html[data-mode='dark']) select {
+    background-color: var(--c-bg-tertiary) !important;
+    color: var(--c-text-primary) !important;
+    border: 1px solid var(--c-border);
+    color-scheme: dark; /* Це важливо для системних елементів */
+}
+
+:host-context(html[data-mode='dark']) select:focus {
+    outline: none;
+    border-color: var(--c-primary);
+}
+
+/* LIGHT INPUTS */
+:host-context(html[data-mode='light']) input,
+:host-context(html[data-mode='light']) select {
+    background: var(--c-bg-secondary);
+    color: var(--c-text-primary);
+    border: 1px solid var(--c-border);
+}
+
+/* BUTTON */
+
+.add-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* DARK BUTTON */
+
+:host-context(body.dark-theme) .add-btn {
+  background: #ffc107;
+  color: #111;
+}
+
+/* LIGHT BUTTON */
+
+:host-context(body.light-theme) .add-btn {
+  background: #222;
+  color: white;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* RESULTS */
+
+.result-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+:host-context(body.dark-theme) .result-box {
+  background: #1f1f1f;
+}
+
+:host-context(body.light-theme) .result-box {
+  background: #ffffff;
+}
+
+/* DEVICE LIST */
+
+.devices-list {
+  margin-top: 30px;
+}
+
+.device-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+:host-context(body.dark-theme) .device-item {
+  background: #1f1f1f;
+}
+
+:host-context(body.light-theme) .device-item {
+  background: #ffffff;
+}
+
+/* REMOVE BUTTON */
+
+.remove-btn {
+  border: none;
+  background: crimson;
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+  .page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    font-size: 22px;
+  }
+}
