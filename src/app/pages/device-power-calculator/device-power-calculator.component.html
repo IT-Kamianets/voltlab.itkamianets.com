@@ -9,71 +9,93 @@
 
     <div class="card-body">
 
+      <!-- Device -->
       <div class="form-row">
         <label>Device</label>
+
         <select [(ngModel)]="selectedDeviceIndex">
-          <option *ngFor="let device of devicePresets; let i = index" [value]="i">
-            {{device.name}} ({{device.power}} W)
+          <option
+            *ngFor="let device of devicePresets; let i = index"
+            [value]="i"
+          >
+            {{ device.name }} ({{ device.power }} W)
           </option>
         </select>
       </div>
 
+      <!-- Custom power -->
       <div class="form-row">
         <label>Custom power (W)</label>
-        <input type="number" [(ngModel)]="customPower">
+
+        <input
+          type="number"
+          [(ngModel)]="customPower"
+          placeholder="Enter power"
+        >
       </div>
 
+      <!-- Hours -->
       <div class="form-row">
         <label>Usage hours</label>
-        <input type="number" [(ngModel)]="hours">
+
+        <input
+          type="number"
+          [(ngModel)]="hours"
+          min="1"
+        >
       </div>
 
-      <button class="btn-primary" (click)="addDevice()">
+      <!-- Button -->
+      <button class="add-btn" (click)="addDevice()">
         Add Device
       </button>
 
     </div>
-
   </div>
 
   <!-- RIGHT SIDE -->
   <div class="card">
 
     <div class="card-header">
-      Calculation Results
+      📊 Results
     </div>
 
-    <div class="result-row">
-      <span>Total Power</span>
-      <span>{{totalPower}} W</span>
-    </div>
+    <div class="card-body">
 
-    <div class="result-row">
-      <span>Energy Consumption</span>
-      <span>{{totalEnergy}} Wh</span>
-    </div>
+      <div class="result-box">
+        <span>Total devices:</span>
+        <strong>{{ devices.length }}</strong>
+      </div>
 
-    <div class="result-row">
-      <span>Energy (kWh)</span>
-      <span>{{totalEnergy/1000 | number:'1.2-2'}} kWh</span>
-    </div>
+      <div class="result-box">
+        <span>Total power:</span>
+        <strong>{{ totalPower }} W</strong>
+      </div>
 
-    <div class="device-list">
+      <div class="result-box">
+        <span>Daily usage:</span>
+        <strong>{{ totalEnergy }} Wh/day</strong>
+      </div>
 
-      <div
-        class="device-item"
-        *ngFor="let device of devices; let i = index">
+      <div class="devices-list">
 
-        {{device.name}} — {{device.power}} W
+        <div
+          class="device-item"
+          *ngFor="let device of devices; let i = index"
+        >
+          <div>
+            <strong>{{ device.name }}</strong>
+            <div>{{ device.power }} W × {{ device.hours }} h</div>
+          </div>
 
-        <button (click)="removeDevice(i)">
-          ✕
-        </button>
+          <button class="remove-btn" (click)="removeDevice(i)">
+            ✕
+          </button>
+        </div>
 
       </div>
 
     </div>
-
   </div>
 
 </div>

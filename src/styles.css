@@ -296,3 +296,13 @@ body {
   font-family: var(--font-display);
 
 }
+html[data-mode='dark'] {
+    select {
+        color-scheme: dark !important; 
+        
+        option {
+            background-color: var(--c-bg-secondary) !important;
+            color: var(--c-text-primary) !important;
+        }
+    }
+}
