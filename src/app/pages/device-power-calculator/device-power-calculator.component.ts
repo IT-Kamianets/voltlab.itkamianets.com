@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './device-power-calculator.component.html',
-  styleUrl: './device-power-calculator.component.scss'
+  styleUrls: ['./device-power-calculator.component.scss']
 })
 export class DevicePowerCalculatorComponent {
 
@@ -20,33 +20,52 @@ export class DevicePowerCalculatorComponent {
   ];
 
   selectedDeviceIndex = 0;
-  customPower: number | null = null;
+  customPower = 0;
   hours = 1;
 
-  devices: { name: string; power: number }[] = [];
+  devices: any[] = [];
 
-  get totalPower(): number {
-    return this.devices.reduce((sum, d) => sum + d.power, 0);
-  }
-
-  get totalEnergy(): number {
-    return this.totalPower * this.hours;
-  }
+  totalPower = 0;
+  totalEnergy = 0;
 
   addDevice() {
+
     const selected = this.devicePresets[this.selectedDeviceIndex];
-    const power = this.customPower ? this.customPower : selected.power;
 
-    this.devices.push({
+    const power =
+      this.customPower > 0
+        ? this.customPower
+        : selected.power;
+
+    const newDevice = {
       name: selected.name,
-      power: power
-    });
+      power: power,
+      hours: this.hours
+    };
 
-    this.customPower = null;
+    this.devices.push(newDevice);
+
+    this.calculateTotals();
+
+    this.customPower = 0;
+    this.hours = 1;
   }
 
   removeDevice(index: number) {
     this.devices.splice(index, 1);
+    this.calculateTotals();
   }
 
+  calculateTotals() {
+
+    this.totalPower = 0;
+    this.totalEnergy = 0;
+
+    for (let device of this.devices) {
+
+      this.totalPower += device.power;
+
+      this.totalEnergy += device.power * device.hours;
+    }
+  }
 }

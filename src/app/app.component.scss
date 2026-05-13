@@ -98,7 +98,7 @@
 		background: var(--c-bg-secondary);
 		border-top: 1px solid var(--c-border);
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(6, 1fr);
 		gap: var(--sp-1);
 		padding: var(--sp-2) var(--sp-2) max(var(--sp-2), env(safe-area-inset-bottom));
 		box-shadow: var(--shadow-md);
