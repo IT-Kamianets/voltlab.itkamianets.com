@@ -7,8 +7,9 @@
 		</p>
 
 		<div class="field">
-			<label class="field__label">Module size preset</label>
+			<label class="field__label" for="pll-preset">Module size preset</label>
 			<select
+				id="pll-preset"
 				class="control control--full"
 				[value]="presetIndex()"
 				(change)="onPresetChange($any($event.target).value)"
@@ -21,10 +22,11 @@
 
 		<div class="fieldRow">
 			<div class="field field--half">
-				<label class="field__label" title="First edge of the rectangle (e.g. along the eave)">
+				<label class="field__label" for="pll-roof-w" title="First edge of the rectangle (e.g. along the eave)">
 					Zone width, m
 				</label>
 				<input
+					id="pll-roof-w"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -36,8 +38,9 @@
 				/>
 			</div>
 			<div class="field field--half">
-				<label class="field__label" title="Second edge (e.g. up the slope)">Zone height, m</label>
+				<label class="field__label" for="pll-roof-h" title="Second edge (e.g. up the slope)">Zone height, m</label>
 				<input
+					id="pll-roof-h"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -51,8 +54,9 @@
 		</div>
 
 		<div class="field">
-			<label class="field__label">Setback from zone edge, m (same on all sides)</label>
+			<label class="field__label" for="pll-margin">Setback from zone edge, m (same on all sides)</label>
 			<input
+				id="pll-margin"
 				class="control control--full"
 				type="number"
 				inputmode="decimal"
@@ -65,8 +69,9 @@
 
 		<div class="fieldRow">
 			<div class="field field--half">
-				<label class="field__label">Module width on roof plane, m</label>
+				<label class="field__label" for="pll-panel-w">Module width on roof plane, m</label>
 				<input
+					id="pll-panel-w"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -77,8 +82,9 @@
 				/>
 			</div>
 			<div class="field field--half">
-				<label class="field__label">Module height on roof plane, m</label>
+				<label class="field__label" for="pll-panel-h">Module height on roof plane, m</label>
 				<input
+					id="pll-panel-h"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -115,8 +121,9 @@
 
 		<div class="fieldRow">
 			<div class="field field--half">
-				<label class="field__label">Horizontal gap between modules, m</label>
+				<label class="field__label" for="pll-gap-h">Horizontal gap between modules, m</label>
 				<input
+					id="pll-gap-h"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -127,8 +134,9 @@
 				/>
 			</div>
 			<div class="field field--half">
-				<label class="field__label">Gap between rows, m</label>
+				<label class="field__label" for="pll-gap-v">Gap between rows, m</label>
 				<input
+					id="pll-gap-v"
 					class="control control--full"
 					type="number"
 					inputmode="decimal"
@@ -141,8 +149,9 @@
 		</div>
 
 		<div class="field">
-			<label class="field__label">Module nameplate, W (for total kWp)</label>
+			<label class="field__label" for="pll-wp">Module nameplate, W (for total kWp)</label>
 			<input
+				id="pll-wp"
 				class="control control--full"
 				type="number"
 				inputmode="decimal"
@@ -178,7 +187,7 @@
 				<li>
 					<span>Approximate rail length</span>
 					<strong>≈ {{ L.railApproxM | number: '1.1-1' }} m</strong>
-					<span class="sub">(rows × usable width; add spare for double rails and offcuts)</span>
+					<span class="sub">(rows × fitted array width; add spare for double rails and offcuts)</span>
 				</li>
 			</ul>
 			<p class="hint">

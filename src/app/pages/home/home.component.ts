@@ -25,7 +25,7 @@ export class HomeComponent {
 		{
 			title: 'Battery usage 🔋',
 			description:
-				'Estimate energy consumption and battery runtime for different scenarios, helping users understand how device load affects battery life',
+				'Estimate energy consumption and battery runtime for different scenarios, helping users understand how device load affects battery life.',
 		},
 		{
 			title: 'Power calculator ⚡',
@@ -73,7 +73,7 @@ export class HomeComponent {
 		{
 			title: 'Legal ⚖',
 			description:
-				'Read the platform’s policies, terms of use, and other legal information. This section ensures users understand their rights and responsibilities while using the service',
+				'Read the platform’s policies, terms of use, and other legal information. This section ensures users understand their rights and responsibilities while using the service.',
 		},
 	] as const;
 

@@ -87,13 +87,22 @@ export class PanelLayoutCalculatorComponent {
 
 		const usedW = cols > 0 ? cols * pw + (cols - 1) * gh : 0;
 		const usedH = rows > 0 ? rows * ph + (rows - 1) * gv : 0;
+
+		if (total <= 0) {
+			return {
+				ok: false as const,
+				reason:
+					'No complete module fits within the usable roof area. Check roof dimensions, setbacks, module size, gaps, and orientation.',
+			};
+		}
+
 		const roofArea = rw * rh;
 		const usedArea = usedW * usedH;
 		const coveragePct = roofArea > 0 ? (100 * usedArea) / roofArea : 0;
 
 		const kwp = (total * wpNom) / 1000;
 
-		const railApproxM = rows > 0 ? rows * usableW : 0;
+		const railApproxM = rows * usedW;
 
 		return {
 			ok: true as const,

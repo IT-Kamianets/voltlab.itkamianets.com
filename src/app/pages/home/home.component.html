@@ -20,7 +20,7 @@
 					tabindex="0"
 					(click)="toggleFlip(i)"
 					(keydown.enter)="toggleFlip(i)"
-					(keydown.space)="toggleFlip(i)"
+					(keydown.space)="$event.preventDefault(); toggleFlip(i)"
 				>
 					<div class="card-inner">
 						<div class="card-face card-front">
