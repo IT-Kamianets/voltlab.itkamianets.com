@@ -32,6 +32,12 @@ export class AppComponent {
 			label: 'Solar',
 			icon: 'solar_power',
 		},
+		{
+			path: '/panel-layout',
+			title: 'Panel layout',
+			label: 'Panels',
+			icon: 'grid_view',
+		},
 		{ path: '/unit-converter', title: 'Unit Converter', label: 'Convert', icon: 'swap_horiz' },
 		{
 			path: '/device-power-calculator',
@@ -55,6 +61,12 @@ export class AppComponent {
 			label: 'Battery usage',
 			icon: 'battery_full',
 			svgIcon: { light: '/battery-usage-light.svg', dark: '/battery-usage-dark.svg' },
+		},
+		{
+			path: '/panel-layout',
+			title: 'Panel layout',
+			label: 'Panel layout',
+			icon: 'grid_view',
 		},
 		{
 			path: '/tips',

@@ -43,6 +43,13 @@ export const routes: Routes = [
 			),
 	},
 	{
+		path: 'panel-layout',
+		loadComponent: () =>
+			import('./pages/panel-layout-calculator/panel-layout-calculator.component').then(
+				(c) => c.PanelLayoutCalculatorComponent,
+			),
+	},
+	{
 		path: 'unit-converter',
 		loadComponent: () =>
 			import('./pages/unit-converter/unit-converter.component').then(
@@ -68,7 +75,7 @@ export const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'home',
+		redirectTo: '',
 		pathMatch: 'full',
 	},
 ];
